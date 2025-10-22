@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  get "home/index"
+  root "home#index"
   devise_for :users
   resources :users, only: [ :show, :edit ]
-  root "home#index"
+  # get "u/:id", to: "users#show"
+  # post 'users/follow', to 'users#follow'
+  # delete 'users/unfollow', to 'users#unfollow'
+  # resources :relationships, only: [ :create, :destroy ]
+  post "follow/:id",   to: "connection#create",  as: "follow_user"
+delete "unfollow/:id", to: "connection#destroy", as: "unfollow_user"
 end

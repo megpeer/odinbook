@@ -1,10 +1,6 @@
 <div>
-    <p>
-        user profile
-        </p>
-        Email:
-<%= @user.email %>
+    <p>user profile</p>
+
+    <%= render "users/user", user: @user %>
+
 </div>
-<div>
-     <%= link_to "Edit profile", edit_user_registration_path %>
-    </div>

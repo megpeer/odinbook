@@ -1,0 +1,12 @@
+<div>
+    <%= user.email %>
+</div>
+<%= render "users/follower_count", user: @user%>
+<%= user.followees.count %> following 
+<p>
+<% if user == current_user %>
+    <%= link_to "Edit profile", edit_user_registration_path %>
+<% elsif current_user %>
+    <%= render "users/follow_button", user: user %>
+<% end %>
+</p>
