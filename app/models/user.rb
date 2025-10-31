@@ -5,14 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many  :followed_users,
-            foreign_key: :follower_id,
+            foreign_key: :followed_id,
             class_name: "Connection",
             dependent: :destroy
 
   has_many  :followees, through: :followed_users, source: :followed, dependent: :destroy
 
   has_many  :following_users,
-            foreign_key: :followed_id,
+            foreign_key: :follower_id,
             class_name: "Connection",
             dependent: :destroy
 

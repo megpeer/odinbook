@@ -1,0 +1,13 @@
+<div>
+<turbo-frame id="follow_button_<%= user.id %>">
+<% if following?(user) %>
+  <%= button_to "unfollow", unfollow_user_path(id: user.id), 
+  method: :delete, 
+  form: { data: { turbo_stream: true } } %>
+<% else %>
+  <%= button_to "follow", follow_user_path(id: user.id), 
+  method: :post, 
+  form: { data: { turbo_stream: true } } %>
+<% end %>
+</turbo-frame>
+</div>
