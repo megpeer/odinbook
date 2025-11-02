@@ -1,12 +1,36 @@
 <div>
     <%= user.email %>
 </div>
-<%= render "profile/follower_count", user: user%>
-<%= user.followed_users.count %> following 
-<p>
-<% if user == current_user %>
-    <%= link_to "Edit profile", edit_user_registration_path %>
-<% elsif current_user %>
-    <%= render "profile/follow_button", user: user %>
-<% end %>
+<div>
+    <%= render "profile/follower_count", user: user%>
+    <%= user.followees.count %> following 
+    <p>
+    <% if user == current_user %>
+        <%= link_to "Edit profile", edit_user_registration_path %>
+    <% elsif current_user %>
+        <%= render "profile/follow_button", user: user %>
+    <% end %>
+</div>
+<div>
+    <br>
+    <div><h3>users I am following:</h3></div>
+    <br>
+    <div>
+        <% current_user.followees.each do |u| %>
+        <%= "#{u.email}" %>
+        <br>
+        <% end %>
+    </div>
+</div>
+<div>
+    <br>
+    <div><h3>my followers:</h3></div>
+    <br>
+    <div>
+        <% current_user.followers.each do |u| %>
+        <%= "#{u.email}" %>
+        <br>
+        <% end %>
+    </div>
+</div>
 </p>

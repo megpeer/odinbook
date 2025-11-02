@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :profile, only: [ :show, :edit ]
   get "p/:id", to: "profile#show"
-  post "follow/:id",   to: "profile#follow",  as: "follow_user"
-  delete "unfollow/:id", to: "profile#unfollow", as: "unfollow_user"
+  post "profile/follow", to: "profile#follow"
+  delete "profile/unfollow", to: "profile#unfollow"
 end

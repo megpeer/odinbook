@@ -10,18 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_13_222151) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_01_185137) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "connections", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "receiver_id"
     t.boolean "accepted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "follower_id"
-    t.integer "followed_id"
+    t.integer "followee_id"
   end
 
   create_table "users", force: :cascade do |t|
