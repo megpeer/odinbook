@@ -28,9 +28,26 @@
     <br>
     <div>
         <% current_user.followers.each do |u| %>
-        <%= "#{u.email}" %>
+        <%= "#{u.email}" %> 
         <br>
         <% end %>
     </div>
+<br>
+    <div><h3>my pending connections:</h3></div>
+    <br>
+    <div>
+        <% if @pending_friends.any? %>
+  <ul>
+    <% @pending_friends.each do |pending_friend| %>
+      <li>
+        <%= pending_friend.follower.email %>
+       </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No pending friend requests.</p>
+<% end %>
+    </div>
+
 </div>
 </p>

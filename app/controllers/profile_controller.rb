@@ -4,7 +4,13 @@ class ProfileController < ApplicationController
   before_action :set_user
 
   def show
-    @users = User.all
+    # @my_followers = Connection.where(followee_id: current_user.id)
+    @pending_friends = current_user.following_users.where(accepted: false)
+    @accepted_friends = current_user.following_users.where(accepted: true)
+    # @users = User.where(follower_id: @pending.id)
+  end
+
+  def add_friend
   end
 
   def follow

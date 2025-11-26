@@ -17,4 +17,5 @@ class User < ApplicationRecord
             dependent: :destroy
 
   has_many  :followers, through: :following_users, dependent: :destroy
+  has_many  :pending_friends, -> { where(accepted: false) }, class_name: "Connection"
 end
