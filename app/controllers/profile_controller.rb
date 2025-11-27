@@ -5,8 +5,9 @@ class ProfileController < ApplicationController
 
   def show
     # @my_followers = Connection.where(followee_id: current_user.id)
-    @pending_friends = current_user.following_users.where(accepted: false)
+    @pending_friends = current_user.followed_users.where(accepted: false)
     @accepted_friends = current_user.following_users.where(accepted: true)
+    @accepted_friends_ = current_user.followed_users.where(accepted: true)
     # @users = User.where(follower_id: @pending.id)
   end
 

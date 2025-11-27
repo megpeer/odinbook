@@ -3,7 +3,9 @@ module ProfileHelper
 def following?(other_user)
   current_user&.followees&.include?(other_user)
 end
-
+def pending?(other_user)
+    current_user&.followees&.include?(other_user)
+end
 def accepted?(other_user)
   current_user&.followees&.include?(other_user)
 end

@@ -12,42 +12,19 @@
     <% end %>
 </div>
 <div>
-    <br>
-    <div><h3>users I am following:</h3></div>
-    <br>
-    <div>
-        <% current_user.followees.each do |u| %>
-        <%= "#{u.email}" %>
-        <br>
-        <% end %>
-    </div>
-</div>
+    <% if user == current_user %>
+        <%= render "am_following", user: user %>
+        <%= render "pending", user: user %>
+    <% end %>
+
 <div>
-    <br>
-    <div><h3>my followers:</h3></div>
-    <br>
-    <div>
-        <% current_user.followers.each do |u| %>
+<br>
+<div><h3>followers:</h3></div>
+<br>
+<div>
+    <% user.followers.each do |u| %>
         <%= "#{u.email}" %> 
         <br>
-        <% end %>
-    </div>
-<br>
-    <div><h3>my pending connections:</h3></div>
-    <br>
-    <div>
-        <% if @pending_friends.any? %>
-  <ul>
-    <% @pending_friends.each do |pending_friend| %>
-      <li>
-        <%= pending_friend.follower.email %>
-       </li>
     <% end %>
-  </ul>
-<% else %>
-  <p>No pending friend requests.</p>
-<% end %>
-    </div>
-
 </div>
-</p>
+<br>

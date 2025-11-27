@@ -1,0 +1,13 @@
+
+<br>
+<div>
+    <% if @pending_friends.any? %>
+    <div><h3>my pending connections:</h3></div>
+        <ul>
+        <% @pending_friends.each do |pending_friend| %>
+            <li><%= pending_friend.followee.email %> accept delete</li>
+        <% end %>
+        </ul>
+    <% end %>
+</div>
+</div>

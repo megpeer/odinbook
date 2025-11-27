@@ -1,0 +1,12 @@
+<% if @accepted_friends.any?%>
+<br>
+<div><h3>users I am following:</h3></div>
+<br>
+<div>
+    <% @accepted_friends.each do |u| %>
+    <%= "#{u.email}" %>
+    <br>
+    <% end %>
+</div>
+</div>
+<% end %>
