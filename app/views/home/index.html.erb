@@ -17,3 +17,36 @@
         <% end %>
     </div>
 </div>
+
+<div>
+    <br>
+    <div><h3>global pending connections</h3></div>
+    <br>
+    <div>
+        <% @connections.each do |c| %>
+            <% if c.accepted == false %>
+                Sender:
+                <%= link_to "#{c.follower.email}", profile_path(c) %>
+                Accepter:
+                <%= link_to "#{c.followee.email}", profile_path(c) %>
+                <br>
+                <% end %>
+        <% end %>
+    </div>
+</div>
+<div>
+    <br>
+    <div><h3>global accepted connections</h3></div>
+    <br>
+    <div>
+        <% @connections.each do |c| %>
+            <% if c.accepted == true %>
+                sender:
+                <%= link_to "#{c.follower.email}", profile_path(c) %>
+                accepter:
+                <%= link_to "#{c.followee.email}", profile_path(c) %>
+                <br>
+                <% end %>
+        <% end %>
+    </div>
+</div>

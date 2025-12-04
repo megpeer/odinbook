@@ -5,7 +5,15 @@
     <div><h3>my pending connections:</h3></div>
         <ul>
         <% @pending_friends.each do |pending_friend| %>
-            <li><%= pending_friend.followee.email %> accept delete</li>
+            <li>
+                <%= pending_friend.follower.email %> 
+                <%= button_to "accept", 
+                profile_accept_path(pending_friend.id), 
+                method: :patch %>
+                <%= button_to "delete", 
+                profile_delete_path(id: pending_friend.id), 
+                method: :delete %>
+            </li>
         <% end %>
         </ul>
     <% end %>

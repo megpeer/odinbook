@@ -4,14 +4,25 @@ class ProfileController < ApplicationController
   before_action :set_user
 
   def show
-    # @my_followers = Connection.where(followee_id: current_user.id)
-    @pending_friends = current_user.followed_users.where(accepted: false)
-    @accepted_friends = current_user.following_users.where(accepted: true)
-    @accepted_friends_ = current_user.followed_users.where(accepted: true)
-    # @users = User.where(follower_id: @pending.id)
+    @pending_friends = current_user.following_users.where(accepted: false)
+    following_friends = current_user.following_users.where(accepted: true)
+    followed_friends = current_user.followed_users.where(accepted: true)
+    @friends = following_friends + followed_friends
   end
 
-  def add_friend
+  def accept
+    @friendship = Connection.find(params[:id])
+    if @friendship.update(accepted: true)
+      redirect_to profile_path(current_user.id), notice: "user was sucessfully updated"
+    else
+      redirect_to profile_path(current_user.id), alert: "friend failed to add"
+    end
+  end
+
+  def delete
+    @friendship = Connection.find(params[:id])
+    @friendship.destroy
+      redirect_to profile_path(current_user.id), notice: "user was removed from friends list"
   end
 
   def follow

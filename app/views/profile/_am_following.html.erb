@@ -1,11 +1,18 @@
-<% if @accepted_friends.any?%>
+<% if @friends.any?%>
 <br>
-<div><h3>users I am following:</h3></div>
+<div><h3>friends list:</h3></div>
 <br>
 <div>
-    <% @accepted_friends.each do |u| %>
-    <%= "#{u.email}" %>
-    <br>
+    <% @friends.each do |u| %>
+    <ul>
+        <li>
+        <% if u.follower.email != current_user.email %>
+            <%= link_to "#{u.follower.email}", profile_path(u.follower) %>
+        <% elsif u.follower.email == current_user.email%>
+            <%= link_to "#{u.followee.email}", profile_path(u.followee) %>
+        </li>
+    </ul>
+        <% end %>
     <% end %>
 </div>
 </div>

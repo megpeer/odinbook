@@ -12,7 +12,6 @@ class User < ApplicationRecord
   has_many  :followees, through: :followed_users, dependent: :destroy
 
   has_many  :following_users,
-            -> { where(accepted: true) },
             foreign_key: :followee_id,
             class_name: "Connection",
             dependent: :destroy
