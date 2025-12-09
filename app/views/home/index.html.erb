@@ -23,12 +23,13 @@
     <div><h3>global pending connections</h3></div>
     <br>
     <div>
+        <% @connections = Connection.all %>
         <% @connections.each do |c| %>
             <% if c.accepted == false %>
                 Sender:
-                <%= link_to "#{c.follower.email}", profile_path(c) %>
+                <%= link_to "#{c.follower.email}", profile_path(c.follower) %>
                 Accepter:
-                <%= link_to "#{c.followee.email}", profile_path(c) %>
+                <%= link_to "#{c.followee.email}", profile_path(c.followee) %>
                 <br>
                 <% end %>
         <% end %>
@@ -42,9 +43,9 @@
         <% @connections.each do |c| %>
             <% if c.accepted == true %>
                 sender:
-                <%= link_to "#{c.follower.email}", profile_path(c) %>
+                <%= link_to "#{c.follower.email}", profile_path(c.follower) %>
                 accepter:
-                <%= link_to "#{c.followee.email}", profile_path(c) %>
+                <%= link_to "#{c.followee.email}", profile_path(c.followee) %>
                 <br>
                 <% end %>
         <% end %>

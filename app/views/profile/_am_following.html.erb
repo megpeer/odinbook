@@ -1,19 +1,13 @@
-<% if @friends.any?%>
-<br>
-<div><h3>friends list:</h3></div>
-<br>
+<% if user.friends.any?%>
 <div>
-    <% @friends.each do |u| %>
-    <ul>
-        <li>
-        <% if u.follower.email != current_user.email %>
-            <%= link_to "#{u.follower.email}", profile_path(u.follower) %>
-        <% elsif u.follower.email == current_user.email%>
-            <%= link_to "#{u.followee.email}", profile_path(u.followee) %>
-        </li>
-    </ul>
+        <% user.friends.each do |friend| %>
+        <ul>
+            <li>
+                <% if friend.email != user.email %>
+                    <%= link_to friend.email, profile_path(friend), data: { turbo: false } %>
+            </li>
+            <% end %>
         <% end %>
+        </ul>
     <% end %>
 </div>
-</div>
-<% end %>

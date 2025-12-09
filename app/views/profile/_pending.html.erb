@@ -1,21 +1,18 @@
-
-<br>
+<% if user.pending.any? %>
 <div>
-    <% if @pending_friends.any? %>
-    <div><h3>my pending connections:</h3></div>
+    <div><h3>friend requests:</h3></div>
         <ul>
-        <% @pending_friends.each do |pending_friend| %>
+        <% user.pending.each do |pending_friend| %>
             <li>
-                <%= pending_friend.follower.email %> 
+                <%= pending_friend.email %> 
                 <%= button_to "accept", 
-                profile_accept_path(pending_friend.id), 
+                profile_accept_userpage_path(id: pending_friend.id), 
                 method: :patch %>
                 <%= button_to "delete", 
-                profile_delete_path(id: pending_friend.id), 
+                profile_delete_userpage_path(id: pending_friend.id), 
                 method: :delete %>
             </li>
         <% end %>
         </ul>
     <% end %>
-</div>
 </div>

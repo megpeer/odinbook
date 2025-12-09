@@ -1,9 +1,31 @@
-<div>
-<%= turbo_frame_tag(dom_id(@user)) do %>
-    <% if following?(user) %>
-        <%= button_to "unfollow", profile_unfollow_path(id: user.id), method: :delete %>
+
+    <% if current_user == user %>
+    <!-- viewing own profile -->
+    <%= link_to "Edit Profile", edit_user_registration_path %>
+
+    <% elsif current_user.friend?(user) %>
+    <!-- already friends -->
+    <%= button_to "Unfriend",
+                    profile_unfollow_path(id: user.id),
+                    method: :delete %>
+    
+    <% elsif current_user.pending_request_to?(user) %>
+    <!-- I sent request -->
+    <%= button_to "Cancel Request",
+                    profile_unfollow_path(id: user.id),
+                    method: :delete %>
+    
+    <% elsif current_user.pending_request_from?(user) %>
+    <!-- They sent request -->
+    
+    <%= button_to "Accept Request",
+                    profile_accept_path(id: user.id),
+                    method: :patch %>
+    
     <% else %>
-        <%= button_to "send request", profile_follow_path(id: user.id), method: :post %>
+    <!-- no existing relationship -->
+    <%= button_to "Add Friend",
+                    profile_follow_path(id: user.id),
+                    method: :post %>
     <% end %>
-<% end %>
-</div>
+

@@ -1,0 +1,4 @@
+<% if user == current_user %>
+    <%= render "am_following", user: user %>
+    <%= render "pending", user: user %>
+<% end %>
