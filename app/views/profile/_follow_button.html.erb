@@ -1,7 +1,7 @@
 
     <% if current_user == user %>
     <!-- viewing own profile -->
-    <%= link_to "Edit Profile", edit_user_registration_path %>
+    <%= link_to "Edit Profile", edit_user_registration_path(user), data: { turbo_frame: "_top" } %>
 
     <% elsif current_user.friend?(user) %>
     <!-- already friends -->

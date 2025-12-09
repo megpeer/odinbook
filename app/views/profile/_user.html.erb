@@ -1,14 +1,20 @@
 <div>
   <div>
-    [Profile Pic]
+    <% if user.image.attached? %>
+    <%= image_tag(user.image)%>
+    <% else %>
+    [img]
+    <% end %>
+  </div>
+  <div>
+    <% if user.bio? %>
+    <%= user.bio%>
+    <% else %>
+    [bio]
+    <% end %>
   </div>
   <%= user.email %>
 </div>
-
-<div>
-"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-</div>
-
 
 <turbo-frame id="user-<%= user.id %>-follow-button">
   <%= render "profile/follow_button", user: user %>

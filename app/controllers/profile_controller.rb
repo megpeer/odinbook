@@ -51,7 +51,7 @@ class ProfileController < ApplicationController
     render_friendlist_update
   end
 
-   def delete_userpage
+  def delete_userpage
     pending_friend = User.find(params[:id])
     connection = Connection.where(
                   follower_id: pending_friend.id,
