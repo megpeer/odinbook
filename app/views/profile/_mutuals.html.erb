@@ -1,0 +1,13 @@
+<% if (current_user.friends & user.friends).any?%>
+<div>
+    mutual friends
+    <% @mutual_friends = current_user.friends & user.friends %>
+        <ul>
+            <% @mutual_friends.each do |friend| %>
+            <li>
+                <%= link_to friend.email, profile_path(friend), data: { turbo: false } %>
+            </li>
+            <% end %>    
+        </ul>
+</div>
+<% end %>

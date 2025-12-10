@@ -1,31 +1,36 @@
 
     <% if current_user == user %>
     <!-- viewing own profile -->
-    <%= link_to "Edit Profile", edit_user_registration_path(user), data: { turbo_frame: "_top" } %>
+    <%= link_to "Edit Profile", edit_user_registration_path(user), data: { turbo_frame: "_top" },
+                                class: "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" %>
 
     <% elsif current_user.friend?(user) %>
     <!-- already friends -->
     <%= button_to "Unfriend",
                     profile_unfollow_path(id: user.id),
-                    method: :delete %>
+                    method: :delete,
+                    class: "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" %>
     
     <% elsif current_user.pending_request_to?(user) %>
     <!-- I sent request -->
     <%= button_to "Cancel Request",
                     profile_unfollow_path(id: user.id),
-                    method: :delete %>
+                    method: :delete,
+                    class: "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" %>
     
     <% elsif current_user.pending_request_from?(user) %>
     <!-- They sent request -->
     
     <%= button_to "Accept Request",
                     profile_accept_path(id: user.id),
-                    method: :patch %>
+                    method: :patch,
+                    class: "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" %>
     
     <% else %>
     <!-- no existing relationship -->
     <%= button_to "Add Friend",
                     profile_follow_path(id: user.id),
-                    method: :post %>
+                    method: :post,
+                    class: "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" %>
     <% end %>
 
