@@ -1,0 +1,50 @@
+<div>
+    <br>
+    <div><h3>global users</h3></div>
+    <br>
+    <div>
+        <% @users.each do |u| %>
+        <%= link_to "#{u.email}", profile_path(u),
+        class: "bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white border border-blue-500 hover:border-transparent rounded" %>
+        <br>
+        <% end %>
+    </div>
+</div>
+
+<div>
+    <br>
+    <div><h3>global pending connections</h3></div>
+    <br>
+    <div>
+        <% @connections = Connection.all %>
+        <% @connections.each do |c| %>
+            <% if c.accepted == false %>
+                Sender:
+                <%= link_to "#{c.follower.email}", profile_path(c.follower),
+                class: "bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white border border-blue-500 hover:border-transparent rounded" %>
+                Accepter:
+                <%= link_to "#{c.followee.email}", profile_path(c.followee),
+                class: "bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white border border-blue-500 hover:border-transparent rounded" %>
+                <br>
+                <% end %>
+        <% end %>
+    </div>
+</div>
+<div>
+    <br>
+    <div><h3>global accepted connections</h3></div>
+    <br>
+    <div>
+        <% @connections.each do |c| %>
+            <% if c.accepted == true %>
+                sender:
+                <%= link_to "#{c.follower.email}", profile_path(c.follower),
+                class: "bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white border border-blue-500 hover:border-transparent rounded" %>
+                accepter:
+                <%= link_to "#{c.followee.email}", profile_path(c.followee),
+                class: "bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white border border-blue-500 hover:border-transparent rounded" %>
+                <br>
+                <% end %>
+        <% end %>
+    </div>
+</div>

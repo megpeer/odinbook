@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
          has_one_attached :image
+         has_many :posts, dependent: :destroy
   # ----------------------------------
   # Connections where I follow someone
   # ----------------------------------

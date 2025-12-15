@@ -1,0 +1,6 @@
+<% @posts = Post.all %>
+<% @posts.each do |post| %>
+<div><%= post.user.email %></div>
+<div><%= post.text %></div>
+<div><%= post.updated_at.strftime("%B %d, %Y") %></div>
+<% end %>
