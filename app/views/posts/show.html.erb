@@ -1,9 +1,37 @@
-<% content_for :title, "Showing post" %>
-
-<div class="md:w-2/3 w-full">
-  <%= render @post %>
-
-  <%= link_to "Edit this post", edit_post_path(@post), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to posts", posts_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this post", @post, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+<div class="m-4">
+    <div class="flex flex-col pl-4 sm:w-auto">
+        <div class="flex flex-row place-content-between items-end">
+            <div class="flex flex-row items-end">
+            <div>
+            <% if @post.user.image.attached? %>
+                <%= image_tag @post.user.image.variant(resize_to_fill: [50, 50]).processed, class: "rounded-full" %>
+            <% else %>
+                [img]
+            <% end %>
+            </div>
+            <div class="font-bold"><%= @post.user.email %></div>
+            </div>
+            <div class="text-xs font-thin text-black"><%= @post.updated_at.strftime("%B %d, %Y") %></div>
+        </div>
+        <div class="m-4">
+            <%= @post.text %>
+        </div>
+        <div>
+            <%= render "comments/comment_form", post: @post, comment: Comment.new %>
+           
+        </div>
+        <div>
+             <% @post.comments.each do |comment| %>
+             <div>
+            <%= render "comments/comment", comment: comment%>
+            </div>
+            <% end %>
+        </div>
+    </div>
+    <% if @post.user == current_user %>
+    <div class="row">
+        <div><%= link_to "Edit", edit_post_path(@post), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %></div>
+        <div><%= button_to "Delete", @post, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %></div>
+        <%end%>
+    </div>
 </div>

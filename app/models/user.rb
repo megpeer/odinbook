@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
          has_one_attached :image
          has_many :posts, dependent: :destroy
+         has_many :comments
   # ----------------------------------
   # Connections where I follow someone
   # ----------------------------------

@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :correct_user, only: %i[ edit update destroy ]
 
   # GET /posts or /posts.json
   def index
@@ -63,6 +64,12 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params.expect(:id))
+    end
+
+    def correct_user
+      unless @post.user == current_user
+        redirect_to root_path, alert: "You are not authorized to edit this post."
+      end
     end
 
     # Only allow a list of trusted parameters through.
