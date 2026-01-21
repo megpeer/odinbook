@@ -29,10 +29,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-     @post.comment.destroy!
+     @comment.destroy!
 
     respond_to do |format|
-      format.html { redirect_to posts_path, notice: "comment was successfully destroyed.", status: :see_other }
+      format.html { redirect_to @post,
+      notice: "comment was successfully destroyed.",
+      status: :see_other }
       format.json { head :no_content }
     end
   end
@@ -46,6 +48,7 @@ class CommentsController < ApplicationController
     end
   end
   def set_comment
-    @comment = Comment.find(params.expect(:id))
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params.require(:id))
   end
 end

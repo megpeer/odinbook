@@ -45,14 +45,22 @@
     <%= "#{user.email}'s Posts" %>
     <% @posts = user.posts.all %>
         <ul>
-            <% @posts.each do |post| %>
+          <% @posts.each do |post| %>
             <li>
-                <div><%= post.text %></div>
-                <div><%= post.updated_at.strftime("%B %d, %Y") %></div>
-                <%= link_to "Edit", edit_post_path(post), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-                <%= button_to "Destroy", post, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+              <div>
+                <%= render "posts/post_abbrev", post: post %>
+                <% if  post.user == current_user %>
+                  <div class="flex flex-row">
+                    <%= link_to "edit", edit_post_path(post), 
+                      class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+                    <%= button_to "delete", post, method: :delete, 
+                      class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", 
+                      data: { turbo_confirm: "Are you sure?" } %>
+                    <%end%>
+                  </div>
+                </div>
             </li>
-            <% end %>    
-        </ul>
+          <%end%>
+        </ul>        
 </div>
-</div>
+

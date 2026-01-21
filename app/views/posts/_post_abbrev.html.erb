@@ -1,0 +1,24 @@
+<div>
+    <%= link_to post_path(post) do %>    
+        <div> 
+        <% if post.user.image.attached? %>
+            <%= image_tag post.user.image.variant(resize_to_fill: [50, 50]).processed, class: "rounded-full" %>
+        <% else %>
+            [img]
+        <% end %>
+        </div>
+        <div class="font-bold">
+            <%= post.user.email %>
+        </div>
+        
+        <div class="text-xs font-thin text-black">
+            <%= post.updated_at.strftime("%B %d, %Y") %>
+        </div>
+        <div class="m-4">
+            <%= post.text.truncate_words(10) %>
+        </div>
+        <div>
+            <%= render "comments/comment_count", post: post%>
+        </div>
+    <% end %>
+</div>
