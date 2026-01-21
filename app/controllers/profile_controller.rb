@@ -5,6 +5,8 @@ class ProfileController < ApplicationController
   before_action :set_friendship_data, only: [ :show ]
 
   def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.order(created_at: :desc).includes(:user, :comments)
   end
 
   def follow
@@ -60,8 +62,8 @@ class ProfileController < ApplicationController
     connection.destroy_all
     render_friendlist_update
   end
-  private
 
+  private
   def set_user
     @user = User.find(params[:id])
   end

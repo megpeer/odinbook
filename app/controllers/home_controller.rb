@@ -3,8 +3,7 @@ class HomeController < ApplicationController
   def index
     @users = User.all
     @connections = Connection.all
-    @posts = Post.all
+    @posts = Post.order(created_at: :desc)
     @post = Post.new
-    # @comment = @post.comments.build
   end
 end
