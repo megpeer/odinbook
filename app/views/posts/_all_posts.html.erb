@@ -1,10 +1,5 @@
-
+<div id="posts">
 <% @posts.each do |post| %>
-<div class="">
-
-    <div>
-        <%= render "posts/post_abbrev", post: post %>
-        <%= render "posts/if_user", post: post %>
-    </div>
-</div>
+    <%= render "posts/post", post: post %>
 <% end %>
+</div>

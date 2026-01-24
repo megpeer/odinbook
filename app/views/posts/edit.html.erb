@@ -1,5 +1,10 @@
 
-  <div>
-Edit Post
-  </div>
-  <%= render "form", post: @post %>
+  <%= turbo_frame_tag dom_id(@post) do %>
+    <%= render "posts/form", post: @post %>
+    <%= link_to "cancel", 
+                root_path,
+                data: { turbo_frame: "_top" },
+                class: "mt-3 block w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    </div>
+ <% end %>
+  

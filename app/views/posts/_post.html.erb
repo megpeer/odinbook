@@ -1,0 +1,7 @@
+<div id="<%= dom_id(post) %>">
+    <turbo-frame id="<%= dom_id(post)%>">
+    
+        <%= render "posts/post_abbrev", post: post %>
+        <%= render "posts/if_user", post: post %>
+    </turbo-frame>
+</div>

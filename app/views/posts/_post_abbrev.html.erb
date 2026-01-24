@@ -1,6 +1,6 @@
 
 <div>
-    <%= link_to post_path(post) do %>    
+    <%= link_to post_path(post), data: { turbo_frame: "_top" } do %>    
         <div> 
         <% if post.user.image.attached? %>
             <%= image_tag post.user.image.variant(resize_to_fill: [50, 50]).processed, class: "rounded-full" %>
