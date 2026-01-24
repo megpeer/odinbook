@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      redirect_to root_path
+      redirect_to @post
     else
       redirect_to root_path, alert: "comment failed to save"
     end
@@ -19,11 +19,24 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @post, notice: "Comment was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @post }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "comment_#{@comment.id}",
+            partial: "comments/comment",
+            locals: { comment: @comment }
+          )
+        end
+        format.html { redirect_to @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            @comment,
+            partial: "comment/comment_form",
+            locals: { comment: @comment }
+          )
+        end
       end
     end
   end
@@ -49,6 +62,6 @@ class CommentsController < ApplicationController
   end
   def set_comment
     @post = Post.find(params[:post_id])
-    @comment = Comment.find(params.require(:id))
+    @comment = @post.comments.find(params[:id])
   end
 end
