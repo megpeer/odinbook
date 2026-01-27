@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+  resources :posts do
+    resources :likes
+  end
   root "home#index"
   devise_for :users, controllers: { registrations:
                     "users/registrations" }

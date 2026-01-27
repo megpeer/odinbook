@@ -1,7 +1,37 @@
-<div id="<%= dom_id(post) %>">
-    <turbo-frame id="<%= dom_id(post)%>">
-    
-        <%= render "posts/post_abbrev", post: post %>
-        <%= render "posts/if_user", post: post %>
-    </turbo-frame>
-</div>
+<turbo-frame id="<%= dom_id(post) %>">
+    <div class="post">
+        <%= link_to profile_path(post.user), data: { turbo_frame: "_top" } do %>    
+                <% if post.user.image.attached? %>
+                    <%= image_tag post.user.image.variant(resize_to_fill: [50, 50]).processed,
+                    class: "rounded-full" %>
+                <% else %>
+                    [img]
+                <% end %>
+            <div class="font-bold"><%= post.user.email %></div>
+            <div class="text-xs font-thin"><%= post.updated_at.strftime("%B %d, %Y") %></div>
+        <% end %>
+        <div class="post-body">
+            <%= link_to post_path(post), data: { turbo_frame: "_top" } do %>
+                <%= post.text %>
+            <% end %>
+        </div>
+
+    <% if  post.user == current_user %>
+        <div class="flex flex-row">
+
+            <%= link_to "edit", 
+            edit_post_path(post),
+            data: { turbo_frame: dom_id(post) },
+            class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+            
+            <%= button_to "delete", post, method: :delete, 
+            class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", 
+            data: { turbo_confirm: "Are you sure?" } %>
+        
+        </div>
+    <% end %>
+
+        <%= render "posts/like_actions", post: post %>
+
+    </div>
+</turbo-frame>

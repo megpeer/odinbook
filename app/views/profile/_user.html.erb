@@ -44,8 +44,7 @@
   <div>
     <% @posts.each do |post| %>
         <div>
-          <%= render "posts/post_abbrev", post: post %>
-          <%= render "posts/if_user", post: post %>
+          <%= render "posts/post", post: post %>
         </div>
     <%end%>  
   </div>

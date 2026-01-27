@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :authenticate_user!
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :correct_user, only: %i[ edit update destroy ]
@@ -9,6 +10,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    @post = Post.includes(likes: :user).find(params[:id])
   end
 
   # GET /posts/new
@@ -18,6 +20,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    render :edit
   end
 
   # POST /posts or /posts.json
@@ -26,11 +29,13 @@ class PostsController < ApplicationController
 
     respond_to do |format|
         if @post.save
-          format.html { redirect_to root_path, notice: "Post was successfully created." }
+          format.html { redirect_to root_path }
           format.turbo_stream do
             render turbo_stream: [
               turbo_stream.prepend(
-              "posts", @post),
+              "posts",
+              partial: "posts/post",
+              locals: { post: @post }),
               turbo_stream.replace(
               "post_form",
               partial: "posts/form",
@@ -48,10 +53,7 @@ class PostsController < ApplicationController
             )
           end
         end
-        Rails.logger.debug @post.errors.full_messages
     end
-  end
-  def edit
   end
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
@@ -59,7 +61,7 @@ class PostsController < ApplicationController
       if @post.update(post_params)
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
-            "post_#{@post.id}",
+            dom_id(@post),
             partial: "posts/post",
             locals: { post: @post }
           )
@@ -84,9 +86,9 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_path, notice: "Post was deleted." }
+      format.html { redirect_to root_path }
       format.turbo_stream do
-        render turbo_stream: turbo_stream.remove(@post)
+        render turbo_stream: turbo_stream.remove(dom_id(@post))
       end
     end
   end

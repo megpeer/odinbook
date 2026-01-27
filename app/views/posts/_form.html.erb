@@ -1,5 +1,4 @@
-<%# <turbo-frame id="post_form"> %>
-<%= form_with(model: post, class: "contents") do |form| %>
+<%= form_with(model: post, id: "post_form", class: "contents") do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -20,4 +19,3 @@
     <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
-<%# </turbo-frame> %>

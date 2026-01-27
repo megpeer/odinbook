@@ -1,0 +1,25 @@
+<div class="flex items-center gap-2">
+    <% if (like = post.likes.find_by(user: current_user)) %>
+        <%= button_to "unlike",
+        post_like_path(post, like),
+        method: :delete,
+        data: { turbo_frame: dom_id(post, :actions) },
+        class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-teal-600 hover:bg-teal-500 font-medium cursor-pointer" %>
+    <% else %>    
+        <%= button_to "like", 
+        post_likes_path(post), 
+        method: :post,
+        data: { turbo_frame: dom_id(post, :actions) },
+        class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-teal-600 hover:bg-teal-500 font-medium cursor-pointer"%>
+    <% end %>
+
+  <span class="text-sm text-gray-600">>
+  </span>
+    LIKES:
+     <div>
+        likes count: <%= post.likes.count %>
+        </div>
+    <% post.likes.each do |like| %>
+    <%= like.user.email %>
+    <% end %>
+</div>

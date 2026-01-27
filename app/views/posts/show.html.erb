@@ -1,29 +1,8 @@
 <%# POST view, with comments %>
 
-<div class="flex flex-col pl-4 sm:w-auto m-4">
+<div id="<%= dom_id(@post, :container) %>" class="flex flex-col pl-4 sm:w-auto m-4">
     <div>
-        <div class="flex flex-col">
-            <div class="flex flex-row items-end justify-between">
-                <div>
-                    <%= link_to profile_path(@post.user) do %>
-                        <% if @post.user.image.attached? %>    
-                            <%= image_tag @post.user.image.variant(resize_to_fill: [50, 50]).processed, class: "rounded-full" %>
-                        <% else %>
-                            [img]
-                        <% end %>
-                        <div class="font-bold">
-                            <%= @post.user.email %>
-                        </div>
-                    <% end %>
-                </div>
-                <div class="text-xs font-thin text-black">
-                    <%= @post.updated_at.strftime("%B %d, %Y") %>
-                </div>
-            </div>
-                <div class="m-4">
-                    <%= @post.text %>
-                </div>
-            <%= render "posts/if_user", post: @post %>
+        <%= render "posts/post", post: @post %>
     </div>
 
 <%# comments %>
@@ -41,4 +20,6 @@
             </div>
             </div>
     </div>
+   
 </div>
+
