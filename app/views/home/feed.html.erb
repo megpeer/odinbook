@@ -1,0 +1,16 @@
+<div class="flex flex-col space-y-6">
+
+    <div>
+    <h1 class="font-bold text-4xl">ODINBOOK</h1>
+    </div>
+
+    <div>
+        <div>
+            post something:
+        </div>
+        <%= render "posts/form", post: Post.new %>
+    </div>
+    <div>
+        <%= render "posts/feed_posts" %>
+    </div>
+</div>

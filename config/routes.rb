@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :likes
   end
   root "home#index"
+  get "/feed", to: "home#feed", as: "feed"
+
   devise_for :users, controllers: { registrations:
                     "users/registrations" }
   resources :profile, only: [ :show, :edit ]

@@ -1,0 +1,5 @@
+<div id="posts"> 
+<% @feed_posts.each do |post| %>
+    <%= render "posts/post", post:post %>
+<% end %>
+</div>

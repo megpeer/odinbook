@@ -6,4 +6,8 @@ class HomeController < ApplicationController
     @posts = Post.order(created_at: :desc)
     @post = Post.new
   end
+  def feed
+    followee_ids = current_user.followees.pluck(:id)
+    @feed_posts = Post.where(user_id: followee_ids).order(created_at: :desc)
+  end
 end
