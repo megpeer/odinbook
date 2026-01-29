@@ -20,6 +20,6 @@
         likes count: <%= post.likes.count %>
         </div>
     <% post.likes.each do |like| %>
-    <%= like.user.email %>
+    <%= like.user.name %>
     <% end %>
 </div>

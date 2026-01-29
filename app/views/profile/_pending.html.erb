@@ -4,7 +4,7 @@
         <ul>
         <% user.pending.each do |pending_friend| %>
             <li>
-                <%= pending_friend.email %> 
+                <%= pending_friend.name %> 
                 <%= button_to "accept", 
                 profile_accept_userpage_path(id: pending_friend.id), 
                 method: :patch %>

@@ -3,8 +3,8 @@
         <% user.friends.each do |friend| %>
         <ul>
             <li>
-                <% if friend.email != user.email %>
-                    <%= link_to friend.email, profile_path(friend), data: { turbo: false } %>
+                <% if friend.name != user.name %>
+                    <%= link_to friend.name, profile_path(friend), data: { turbo: false } %>
             </li>
             <% end %>
         <% end %>
