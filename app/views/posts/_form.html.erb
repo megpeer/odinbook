@@ -10,11 +10,25 @@
       </ul>
     </div>
   <% end %>
+  <div data-controller="charlimit" 
+      data-charlimit-number-value="400">
 
   <div class="my-5">
-    <%= form.textarea :text, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": post.errors[:text].none?, "border-red-400 focus:outline-red-600": post.errors[:text].any?}] %>
+    <%= form.textarea :text, 
+                      maxlength: 400, 
+                      rows: 4, 
+                      placeholder: "400 character limit", 
+                      data: {
+                          action: "input->charlimit#update",
+                          charlimit_target: "input"
+                      },
+                      class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full"%>
   </div>
 
+  <div class="text-sm text-gray-500">
+    <span data-charlimit-target="output"></span> characters remaining
+  </div>
+  </div>
   <div class="inline">
     <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
   </div>
