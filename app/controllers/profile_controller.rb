@@ -9,6 +9,35 @@ class ProfileController < ApplicationController
     @posts = @user.posts.order(created_at: :desc).includes(:user, :comments)
   end
 
+  def index
+    if params[:query].present?
+      @names = User.where("name ILIKE ?", "%#{params[:query]}%")
+    else
+      @names = User.none
+    end
+      if turbo_frame_request?
+    #     render turbo_stream: turbo_stream.replace(
+    #       "names",
+    #       partial: "profile/name",
+    #       collection: @names,
+    #       as: :user
+    #     )
+    #     else
+    #     render :index
+    #     end
+    # end
+    # if turbo_frame_request?
+    render html: render_to_string(
+      partial: "profile/name",
+      collection: @names,
+      as: :user
+    ).then { |content| "<turbo-frame id='names'>#{content}</turbo-frame>".html_safe }
+      else
+    render :index
+      end
+  end
+
+
   def follow
     connection = Connection.find_or_initialize_by(
       follower_id: current_user.id,
