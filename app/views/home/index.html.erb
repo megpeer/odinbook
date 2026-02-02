@@ -10,10 +10,10 @@
         </div>
         <%= render "posts/form", post: Post.new %>
     </div>
-    <div>
-        <%= render "posts/all_posts" %>
-    </div>
 
-
-<%#= render "home/debug"%>
+        <%= render "posts/page",
+            posts: @posts,
+            pagy: @pagy,
+            path: ->(opts) { posts_path(opts) } %>
+        
 </div>

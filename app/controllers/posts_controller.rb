@@ -6,6 +6,15 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
+    @pagy, @posts = pagy(
+                    Post.includes(:user).order(created_at: :desc),
+                    items: 10,
+                    limit: 10
+                    )
+
+
+      render partial: "posts/page",
+            locals: { posts: @posts, pagy: @pagy, path: ->(opts) { posts_path(opts) } }
   end
 
   # GET /posts/1 or /posts/1.json

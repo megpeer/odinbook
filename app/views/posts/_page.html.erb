@@ -1,0 +1,17 @@
+
+   
+    <turbo-frame id="posts_page_<%= pagy.page %>">
+    
+    <%= render partial: "posts/post",
+                collection: posts,
+                as: :post %>
+
+    <% if pagy.next %>
+        <turbo-frame
+            id="posts_page_<%= pagy.next %>"
+            src="<%= path.call(page: pagy.next) %>"
+            loading="lazy">
+          <%= render "shared/spinner" %>
+        </turbo-frame>
+        <% end %>
+    </turbo-frame>
