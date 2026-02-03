@@ -7,6 +7,9 @@ class User < ApplicationRecord
          has_one_attached :image
          has_many :posts, dependent: :destroy
          has_many :comments
+
+  after_commit :send_welcome_email, on: :create
+
   # ----------------------------------
   # Connections where I follow someone
   # ----------------------------------
@@ -53,5 +56,9 @@ class User < ApplicationRecord
     outgoing = active_connections.where(accepted: true).map(&:followee)
     incoming = passive_connections.where(accepted: true).map(&:follower)
     outgoing + incoming
+  end
+    private
+  def send_welcome_email
+    WelcomeMailer.with(user: self).welcome_email.deliver_later
   end
 end
