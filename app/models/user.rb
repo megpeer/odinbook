@@ -8,7 +8,7 @@ class User < ApplicationRecord
          has_many :posts, dependent: :destroy
          has_many :comments
 
-  after_commit :send_welcome_email, on: :create
+  after_create_commit :send_welcome_email, on: :create
 
   # ----------------------------------
   # Connections where I follow someone
@@ -59,6 +59,7 @@ class User < ApplicationRecord
   end
     private
   def send_welcome_email
+    return if Rails.env.development? || Rails.env.test?
     WelcomeMailer.with(user: self).welcome_email.deliver_later
   end
 end
