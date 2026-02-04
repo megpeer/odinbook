@@ -16,24 +16,13 @@ class ProfileController < ApplicationController
       @names = User.none
     end
       if turbo_frame_request?
-    #     render turbo_stream: turbo_stream.replace(
-    #       "names",
-    #       partial: "profile/name",
-    #       collection: @names,
-    #       as: :user
-    #     )
-    #     else
-    #     render :index
-    #     end
-    # end
-    # if turbo_frame_request?
     render html: render_to_string(
       partial: "profile/name",
       collection: @names,
       as: :user
     ).then { |content| "<turbo-frame id='names'>#{content}</turbo-frame>".html_safe }
       else
-    render :index
+    render html: "<turbo-frame id='names'></turbo-frame>".html_safe
       end
   end
 
