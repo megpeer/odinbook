@@ -97,4 +97,8 @@ test:
 #     database: odinbook_production_cable
 #     migrations_paths: db/cable_migrate
 production:
-  url: <%= ENV["DATABASE_URL"] %>
+  primary:
+    url: <%= ENV["DATABASE_URL"] %>
+  
+  cache:
+    <<: *primary
