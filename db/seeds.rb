@@ -1,4 +1,8 @@
-ENV["SEEDING"] = "true"
+
+Rails.env.define_singleton_method(:seed?) do
+  ENV["SEEDING"] == "true"
+end
+
 
 [
   { email: "luke@rebels.com", name: "Luke" },

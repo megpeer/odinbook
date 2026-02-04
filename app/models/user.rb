@@ -60,8 +60,8 @@ class User < ApplicationRecord
   private
 
   def send_welcome_email
-    return if ENV["SEEDING"] == "true"
-    return if Rails.env.development? || Rails.env.test?
+    return unless Rails.env.production?
+    return if Rails.env.seed?
 
     WelcomeMailer.with(user: self).welcome_email.deliver_later
   end
