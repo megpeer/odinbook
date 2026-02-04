@@ -1,3 +1,5 @@
+ENV["SEEDING"] = "true"
+
 [
   { email: "luke@rebels.com", name: "Luke" },
   { email: "leia@rebels.com", name: "Leia" },

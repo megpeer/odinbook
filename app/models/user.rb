@@ -57,9 +57,12 @@ class User < ApplicationRecord
     incoming = passive_connections.where(accepted: true).map(&:follower)
     outgoing + incoming
   end
-    private
+  private
+
   def send_welcome_email
-    return if Rails.env.development? || Rails.env.test? || Rails.env.production? && Rails.const_defined?(:Console)
+    return if ENV["SEEDING"] == "true"
+    return if Rails.env.development? || Rails.env.test?
+
     WelcomeMailer.with(user: self).welcome_email.deliver_later
   end
 end
