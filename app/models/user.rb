@@ -59,7 +59,7 @@ class User < ApplicationRecord
   end
     private
   def send_welcome_email
-    return if Rails.env.development? || Rails.env.test?
+    return if Rails.env.development? || Rails.env.test? || Rails.env.production? && Rails.const_defined?(:Console)
     WelcomeMailer.with(user: self).welcome_email.deliver_later
   end
 end
