@@ -20,6 +20,7 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 
 gem "devise"
+gem "omniauth-github", "~> 2.0.0"
 
 gem "pagy", "~> 43.2"
 
