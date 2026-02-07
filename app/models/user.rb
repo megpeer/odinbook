@@ -64,5 +64,7 @@ class User < ApplicationRecord
     return if Rails.env.seed?
 
     WelcomeMailer.with(user: self).welcome_email.deliver_later
+  rescue => e
+    Rails.logger.error "Welcome email failed: #{e.message}"
   end
 end
