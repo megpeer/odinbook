@@ -63,7 +63,18 @@ config.action_cable.mount_path = nil
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "odinbook-yvnb.onrender.com",
                                               protocol: "https" }
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+    address: "smtp.sendgrid.net",
+    port: 587,
+    authentication: :plain,
+    user_name: "apikey",
+    password: ENV["SENDGRID_API_KEY"],
+    domain: "onrender.com",
+    enable_starttls_auto: true
+}
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {
