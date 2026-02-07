@@ -8,12 +8,22 @@ class SendgridDelivery
   end
 
   def deliver!(mail)
+    Rails.logger.info "SENDGRID DELIVERY METHOD CALLED"
+
     from = Email.new(email: mail.from.first)
-    to = Email.new(email: mail.to.first)
+    to   = Email.new(email: mail.to.first)
+
+    if mail.html_part
+      content_type = "text/html"
+      content_value = mail.html_part.body.decoded
+    else
+      content_type = "text/plain"
+      content_value = mail.text_part&.body&.decoded || mail.body.decoded
+    end
 
     content = Content.new(
-      type: mail.content_type || "text/html",
-      value: mail.body.decoded
+      type: content_type,
+      value: content_value
     )
 
     sg_mail = Mail.new(from, mail.subject, to, content)
