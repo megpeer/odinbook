@@ -1,9 +1,20 @@
-<h1>Welcome to my OdinBook app, <%= @user.name %></h1>
+<h1>Welcome, <%= @user.name %>!</h1>
+
 <p>
-  You have successfully signed up to example.com,
-  your username is: <%= @user.email %>.<br>
+  Thanks for signing up for <%= link_to 'OdinBook!', 'https://odinbook-yvnb.onrender.com/', target: "_blank" %>.  Feel free to log in, add friends, post, comment and like stuff!
+</p>
+
+
+
+
+<p>
+  I also invite you to check out <%= link_to 'my GitHub projects', 'https://github.com/megpeer', target: "_blank" %>. 
+  Your time and interest are greatly appreciated.
+</p>
+
+<p>
+  Many thanks,
 </p>
 <p>
-  To log in to the site, follow this link: <%= link_to 'login', new_user_session_url %>.
+  -Meg
 </p>
-<p>Thanks for joining and have a great day!</p>
