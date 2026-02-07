@@ -8,7 +8,7 @@ class User < ApplicationRecord
          has_many :posts, dependent: :destroy
          has_many :comments
 
-  after_create_commit :send_welcome_email, on: :create
+  # after_create_commit :send_welcome_email, on: :create
 
   # ----------------------------------
   # Connections where I follow someone
@@ -57,16 +57,16 @@ class User < ApplicationRecord
     incoming = passive_connections.where(accepted: true).map(&:follower)
     outgoing + incoming
   end
-  private
+  # private
 
-  def send_welcome_email
-    Rails.logger.info "WELCOME EMAIL CALLBACK FIRED for user #{id}"
+  # def send_welcome_email
+  #   Rails.logger.info "WELCOME EMAIL CALLBACK FIRED for user #{id}"
 
-    return unless Rails.env.production?
-    return if Rails.env.seed?
+  #   return unless Rails.env.production?
+  #   return if Rails.env.seed?
 
-    WelcomeMailer.with(user: self).welcome_email.deliver_later
-  rescue => e
-    Rails.logger.error "Welcome email failed: #{e.message}"
-  end
+  #   WelcomeMailer.with(user: self).welcome_email.deliver_later
+  # rescue => e
+  #   Rails.logger.error "Welcome email failed: #{e.message}"
+  # end
 end
