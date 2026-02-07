@@ -66,10 +66,6 @@ config.action_cable.mount_path = nil
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :sendgrid
 
-  config.action_mailer.sendgrid_settings = {
-    api_key: ENV["SENDGRID_API_KEY"]
-  }
-
   # config.action_mailer.delivery_method = :smtp
 
   #   config.action_mailer.smtp_settings = {
