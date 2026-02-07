@@ -60,6 +60,8 @@ class User < ApplicationRecord
   private
 
   def send_welcome_email
+    Rails.logger.info "WELCOME EMAIL CALLBACK FIRED for user #{id}"
+
     return unless Rails.env.production?
     return if Rails.env.seed?
 
