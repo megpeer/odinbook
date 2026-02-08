@@ -1,6 +1,7 @@
 class User < ApplicationRecord
+  require "open-uri"
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[github]
 
          has_many :likes, dependent: :destroy
          has_many :liked_posts, through: :likes, source: :posts
@@ -57,16 +58,34 @@ class User < ApplicationRecord
     incoming = passive_connections.where(accepted: true).map(&:follower)
     outgoing + incoming
   end
-  # private
+  #--- OAUTH STUFF ---#
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email =
+            auth.info.email.presence ||
+            "#{auth.uid}@github.com"
+      user.password = Devise.friendly_token[0, 20]
+      user.name = auth.info.name || auth.info.nickname
+      user.bio = auth.extra.raw_info.bio if user.bio.blank?
+      if auth.info.image.present? && !user.image.attached?
+        file = URI.open(auth.info.image)
+        user.image.attach(
+          io: file,
+          filename: "github-avatar-#{auth.uid}.jpg",
+          content_type: "image/jpeg"
+        )
+      end
+    end
+  end
 
-  # def send_welcome_email
-  #   Rails.logger.info "WELCOME EMAIL CALLBACK FIRED for user #{id}"
+  # def self.new_with_session(params, session)
+  #   super.tap do |user|
+  #     data = session.dig("devise.github_data", "extra", "raw_info")
 
-  #   return unless Rails.env.production?
-  #   return if Rails.env.seed?
-
-  #   WelcomeMailer.with(user: self).welcome_email.deliver_later
-  # rescue => e
-  #   Rails.logger.error "Welcome email failed: #{e.message}"
+  #   if data
+  #     user.email = data["email"] if user.email.blank?
+  #     user.name  = data["name"]  if user.name.blank?
+  #   end
+  #   end
   # end
 end

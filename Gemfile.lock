@@ -112,7 +112,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    dotenv (3.1.8)
+    dotenv (3.2.0)
+    dotenv-rails (3.2.0)
+      dotenv (= 3.2.0)
+      railties (>= 6.1)
     drb (2.2.3)
     ed25519 (1.4.0)
     erb (5.0.3)
@@ -248,6 +251,9 @@ GEM
       omniauth-oauth2 (~> 1.8)
     omniauth-oauth2 (1.9.0)
       oauth2 (>= 2.0.2, < 3)
+      omniauth (~> 2.0)
+    omniauth-rails_csrf_protection (2.0.1)
+      actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
@@ -469,12 +475,14 @@ DEPENDENCIES
   capybara
   debug
   devise
+  dotenv-rails
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
   kamal
   letter_opener
-  omniauth-github (~> 2.0.0)
+  omniauth-github
+  omniauth-rails_csrf_protection
   pagy (~> 43.2)
   pg (~> 1.1)
   propshaft
