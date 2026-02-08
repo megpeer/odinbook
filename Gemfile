@@ -20,7 +20,8 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 
 gem "devise"
-gem "omniauth-github", "~> 2.0.0"
+gem "omniauth-github"
+gem "omniauth-rails_csrf_protection"
 
 gem "pagy", "~> 43.2"
 
