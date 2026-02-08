@@ -9,8 +9,13 @@ Rails.application.routes.draw do
 
   get "/feed", to: "home#feed", as: "feed"
 
-  devise_for :users, controllers: { registrations:
-                    "users/registrations" }
+  devise_for :users, controllers: {
+                    registrations: "users/registrations",
+                    omniauth_callbacks: "users/omniauth_callbacks"
+                    }
+  # devise_scope :user do
+  # delete "sign_out", to: "devise/sessions#destroy", as: :destroy_user_session
+  # end
   resources :profile, only: [ :show, :edit ]
 
   get "/profile", to: "profile#index", as: :profile_index

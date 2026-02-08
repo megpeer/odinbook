@@ -23,6 +23,8 @@ gem "devise"
 gem "omniauth-github"
 gem "omniauth-rails_csrf_protection"
 
+gem "dotenv-rails", groups: [ :development, :test ]
+
 gem "pagy", "~> 43.2"
 
 gem "image_processing", "~> 1.2"
