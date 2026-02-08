@@ -77,15 +77,4 @@ class User < ApplicationRecord
       end
     end
   end
-
-  # def self.new_with_session(params, session)
-  #   super.tap do |user|
-  #     data = session.dig("devise.github_data", "extra", "raw_info")
-
-  #   if data
-  #     user.email = data["email"] if user.email.blank?
-  #     user.name  = data["name"]  if user.name.blank?
-  #   end
-  #   end
-  # end
 end
