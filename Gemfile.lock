@@ -249,6 +249,9 @@ GEM
     omniauth-oauth2 (1.9.0)
       oauth2 (>= 2.0.2, < 3)
       omniauth (~> 2.0)
+    omniauth-rails_csrf_protection (2.0.1)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
     pagy (43.2.8)
@@ -474,7 +477,8 @@ DEPENDENCIES
   jbuilder
   kamal
   letter_opener
-  omniauth-github (~> 2.0.0)
+  omniauth-github
+  omniauth-rails_csrf_protection
   pagy (~> 43.2)
   pg (~> 1.1)
   propshaft
