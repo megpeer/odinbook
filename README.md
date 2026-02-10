@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+* RSPEC/GUARD
+Basic system tests verify page loading and authentication flows, while model specs validate core ActiveRecord associations. RSpec runs continuously via Guard.

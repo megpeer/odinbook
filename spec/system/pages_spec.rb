@@ -12,23 +12,14 @@ RSpec.describe "Pages", type: :system do
     visit root_path
     expect(page).to have_content("post something:")
   end
-end
-RSpec.describe "Feed", type: :system do
-  let(:user) { create(:user) }
-
   it "loads feed for logged in user" do
     sign_in_as(user)
     puts page.current_path
     visit feed_path
     expect(page).to have_content("Feed")
   end
+  it "need to sign in before continuing" do
+    visit feed_path
+    expect(page).to have_content("Sign In")
+  end
 end
-
-
-# Home page loads
-
-# Feed loads (logged in)
-
-# Profile page loads
-
-# New post page loads
