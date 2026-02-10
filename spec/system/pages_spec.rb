@@ -2,18 +2,23 @@
 require "rails_helper"
 
 RSpec.describe "Pages", type: :system do
-  # this wont work unless user is logged in,
-  # and will re-diret to login page.
-  it "loads the home page" do
+  let(:user) { create(:user) }
+  it "loads sign in page if not logged in" do
     visit root_path
-    expect(page).to have_content("Welcome")
+    expect(page).to have_content("Sign In")
+  end
+  it "loads the home page" do
+    sign_in_as(user)
+    visit root_path
+    expect(page).to have_content("post something:")
   end
 end
 RSpec.describe "Feed", type: :system do
   let(:user) { create(:user) }
 
   it "loads feed for logged in user" do
-    sign_in user
+    sign_in_as(user)
+    puts page.current_path
     visit feed_path
     expect(page).to have_content("Feed")
   end
