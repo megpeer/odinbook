@@ -18,14 +18,29 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag :tailwind, debug: true %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+<body class="bg-[var(--color-background)] text-[var(--color-text)] min-h-screen">
+
+
     <nav>
     <%= render 'layouts/navbar' %>
     </nav>
+
+    <!-- darkmode toggle -->
+      <div data-controller="dark-mode">
+          <button 
+              data-action="click->dark-mode#toggle"
+              data-dark-mode-target="button" 
+              class="p-2 rounded-md text-[var(--color-text)] bg-[var(--color-primary)]">
+            dark mode
+          </button>
+      </div>
+  <!-- ... /darkmode toggle ... -->
+
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%# render 'layouts/userlist' %>
@@ -33,6 +48,7 @@
     <main class="container mx-auto mt-28 px-5 flex">
       
       <%= yield %>
+
 
     </main>
   </body>

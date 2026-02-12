@@ -169,6 +169,10 @@ GEM
       rspec (>= 2.99.0, < 4.0)
     hashie (5.1.0)
       logger
+    hotwire-spark (0.1.13)
+      listen
+      rails (>= 7.0.0)
+      zeitwerk
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     image_processing (1.14.0)
@@ -544,6 +548,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   guard-rspec
+  hotwire-spark
   image_processing (~> 1.2)
   importmap-rails
   jbuilder

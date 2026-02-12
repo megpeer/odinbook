@@ -1,1 +1,19 @@
+/* app/assets/tailwind/application.css */
 @import "tailwindcss";
+
+/* Light mode tokens (default) */
+    :root {
+        --color-text: #171707;
+        --color-background: #fcfcf8;
+        --color-primary: #c2b93d;
+        --color-secondary: #97a7dd;
+        --color-accent: #b370d2;
+    }
+/* Dark mode tokens */
+    :root.dark{
+        --color-text: #f8f8e8;
+        --color-background: #070703;
+        --color-primary: #c2b93d;
+        --color-secondary: #223268;
+        --color-accent: #702d8f;
+    }
