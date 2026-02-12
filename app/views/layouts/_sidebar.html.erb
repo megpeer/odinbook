@@ -1,0 +1,59 @@
+<div class="h-screen z-10 fixed inset-y-15 left-0 w-45 bg-(--color-background)">
+<% if user_signed_in?%>
+<%# ------ user info ------%>
+<div class="flex flex-col">
+<div class="flex flex-col p-2 m-2 w-fit mx-auto bg-(--color-background) shadow-md hover:shadow-2xl hover:shadow-(--color-accent)">
+    
+        <%= link_to profile_path(current_user) do %>
+        <div class="">
+        <div>
+        <% if current_user.image.attached? %>
+        <%= image_tag current_user.image.variant(resize_to_fill: [100, 100]).processed, class: "" %>
+        <% else %>
+        <%= image_tag("Avatar-Accent.svg") %>
+        <% end %>
+        </div>
+        <% end %>
+    
+    <div class="text-xl text-center font-semibold text-black px-4">
+        <%= current_user.name %>
+    </div>
+    </div>
+</div>
+<%# ------ /user info ------%>    
+    <%= link_to "Home", root_path,
+                        class: "btn_side" %>
+    <%= link_to "Feed", feed_path,
+                        class: "btn_side" %>
+
+<%# ------ searchbar ------%>
+    <%= form_with(url: profile_index_path, 
+                method: :get,
+                data: {controller: "search-form",
+                turbo_frame: "names",
+                turbo_action: "advance"
+                }
+            ) do |form| %>
+            <div class="bg-(--color-secondary) font-semibold py-2 px-4">
+        <%= form.text_field :query, placeholder: "User Search", class: "w-full rounded-md outline-2 outline-(--color-primary)/50 outline-offset-3 focus:outline-4 focus:outline-(--color-primary) focus:outline-offset-3",
+                                    data: {action: "input->search-form#search"} %>
+       
+    </div>
+    <% end %>    
+<%# ------ /searchbar ------%>
+
+<turbo-frame id="names">
+    <div class="flex flex-col gap-4">
+        <% if defined?(@names) %>
+   
+            <%= render partial: "profile/name",
+                        collection: @names,
+                        as: :user %>
+
+        <% end %>
+        </div>
+</turbo-frame>
+
+<% end %>
+</div>
+</div>

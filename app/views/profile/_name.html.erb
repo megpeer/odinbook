@@ -1,7 +1,17 @@
 
 <div id="<%= dom_id(user) %>">
+<div>
   <%= link_to user.name,
               profile_path(user),
-              class: "text-blue-600 underline hover:text-blue-700",
+              class: "
+                block
+                w-fit
+                rounded-md
+                bg-(--color-secondary)
+                hover:bg-(--color-primary)
+                font-semibold
+                m-2
+                p-4",
               data: { turbo_frame: "_top"} %>
+              </div>
 </div>
