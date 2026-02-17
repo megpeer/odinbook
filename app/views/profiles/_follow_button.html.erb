@@ -1,0 +1,78 @@
+
+    <% if current_user == user %>
+    <!-- viewing own profile -->
+    <%= link_to "Edit Profile", edit_user_registration_path(user), data: { turbo_frame: "_top" },
+                                class: "m-1
+                            w-20
+                            h-8 
+                            flex
+                            items-center
+                            justify-center
+                            rounded-lg 
+                            font-semibold
+                            text-xs
+                            bg-(--color-accent) 
+                            hover:bg-(--color-primary)
+                            cursor-pointer" %>
+
+    <% elsif current_user.friend?(user) %>
+    <!-- already friends -->
+    <%= button_to "Unfriend",
+                    unfollow_profile_path(id: user.id),
+                    method: :delete,
+                    class: "m-1
+                            w-20
+                            h-8
+                            rounded-lg 
+                            font-semibold
+                            text-xs
+                            bg-(--color-accent) 
+                            hover:bg-(--color-primary)
+                            cursor-pointer" %>
+    
+    <% elsif current_user.pending_request_to?(user) %>
+    <!-- I sent request -->
+    <%= button_to "Cancel Request",
+                    unfollow_profile_path(id: user.id),
+                    method: :delete,
+                    class: "m-1
+                            w-20
+                            h-8
+                            rounded-lg 
+                            font-semibold
+                            text-xs
+                            bg-(--color-accent) 
+                            hover:bg-(--color-primary)
+                            cursor-pointer" %>
+    
+    <% elsif current_user.pending_request_from?(user) %>
+    <!-- They sent request -->
+    <%= button_to "Accept Request",
+                    accept_userpage_profile_path(id: user.id),
+                    method: :patch,
+                    class: "m-1
+                            w-20
+                            h-8
+                            rounded-lg 
+                            font-semibold
+                            text-xs
+                            bg-(--color-accent) 
+                            hover:bg-(--color-primary)
+                            cursor-pointer" %>
+    
+    <% else %>
+    <!-- no existing relationship -->
+    <%= button_to "Add Friend",
+                    follow_profile_path(id: user.id),
+                    method: :post,
+                    class: "m-1
+                            w-20
+                            h-8
+                            rounded-lg 
+                            font-semibold
+                            text-xs
+                            bg-(--color-accent) 
+                            hover:bg-(--color-primary)
+                            cursor-pointer" %>
+    <% end %>
+

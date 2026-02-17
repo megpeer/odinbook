@@ -4,7 +4,7 @@
         <ul>
             <li>
                 <% if friend.name != user.name %>
-                    <%= link_to friend.name, profile_path(friend), data: { turbo: false } %>
+                    <%= link_to friend.name, profiles_path(friend), data: { turbo: false } %>
             </li>
             <% end %>
         <% end %>

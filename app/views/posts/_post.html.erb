@@ -1,9 +1,7 @@
-
-
 <turbo-frame id="<%= dom_id(post) %>">
-<div class="post">
-    <div class="flex flex-row m-2 p-8 bg-(--color-background) rounded-md shadow-xl">
-        <div class="shrink-0 border border-red-500">
+
+    <div class="post flex flex-row m-2 p-8 bg-(--color-background) rounded-md shadow-xl">
+        <div class="shrink-0">
             <%= link_to profile_path(post.user), data: { turbo_frame: "_top" } do %>    
                 <% if post.user.image.attached? %>
                     <%= image_tag post.user.image.variant(resize_to_fill: [50, 50]).processed,
@@ -12,30 +10,32 @@
                     [img]
                 <% end %>
         </div>
-        <div class="m-2 flex flex-col">
-            <div class="font-bold text-s border border-red-500"><%= post.user.name %></div>
-            <div class="text-xs font-thin border border-red-500"><%= post.updated_at.strftime("%B %d, %Y") %></div>
+        <div class="m-2 flex flex-col w-full">
+            <div class="font-bold text-s"><%= post.user.name %></div>
+            <div class="text-xs font-thin"><%= post.updated_at.strftime("%B %d, %Y") %></div>
             <% end %>
             
-            <div class="post-body m-2 border border-red-500">
+            <div class="post-body m-2">
                 
                     <%= post.text %>
                 
             </div>
-            <div class="flex flex-row">
-
-                <div class="m-2 shrink-0 border border-red-500">
+            <div class="flex justify-between">
+                <div class="comments-likes flex">
+                    <div class="m-1 shrink-0 ">
+                    
+                    <%= render "comments/comment_count", post: post %>
+                    
+                    </div>
                 
-                <%= render "comments/comment_count", post: post %>
-                
-                </div>
-            
-                <div class="m-2 border border-red-500">
-                <%= render "posts/like_actions", post: post %>
+                    <div class="m-1 shrink-0">
+                    <%= render "posts/like_actions", post: post %>
+                    </div>
                 </div>
 
+            <div class="flex flex-row m-2 justify-end">
             <% if  post.user == current_user %>
-                <div class="flex flex-row m-2 justify-end border border-red-500">
+                
                     <%= button_to "delete", post, method: :delete, 
                     class: "m-1
                             w-12
@@ -64,13 +64,13 @@
                             hover:bg-(--color-primary)
                             cursor-pointer" %>
             <% end %>
-                </div>
+            </div>
 
                 
                 
             </div>
         </div>
     </div>
-</div>
+
 </turbo-frame>
 

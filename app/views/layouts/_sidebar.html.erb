@@ -1,59 +1,99 @@
-<div class="h-screen z-10 fixed inset-y-15 left-0 w-45 bg-(--color-background)">
-<% if user_signed_in?%>
-<%# ------ user info ------%>
-<div class="flex flex-col">
-<div class="flex flex-col p-2 m-2 w-fit mx-auto bg-(--color-background) shadow-md hover:shadow-2xl hover:shadow-(--color-accent)">
-    
-        <%= link_to profile_path(current_user) do %>
-        <div class="">
-        <div>
-        <% if current_user.image.attached? %>
-        <%= image_tag current_user.image.variant(resize_to_fill: [100, 100]).processed, class: "" %>
-        <% else %>
-        <%= image_tag("Avatar-Accent.svg") %>
-        <% end %>
+<div class="fixed min-h-screen flex flex-col w-45 bg-(--color-secondary)">
+    <div class="">
+        <div class="flex justify-between">
+            <% if user_signed_in? %>
+            <%# ------ user info ------%>
+                <%= link_to profile_path(current_user) do %>
+                    <div class="p-4 w-fit hover:bg-(--color-primary) rounded-full">
+                        <div>
+                            <% if current_user.image.attached? %>
+                            <%= image_tag current_user.image.variant(resize_to_fill: [70, 70]).processed, class: "rounded-full" %>
+                            <% else %>
+                            <%= image_tag("Avatar-Accent.svg") %>
+                            <% end %>
+                            <div class=" text-xl font-semibold text-center">
+                                <%= current_user.name %>
+                            </div>
+                        </div>
+                        
+                    </div>
+                <% end %>
+            <%# ------ /user info ------%>
+            <div class="flex flex-col w-full p-4">
+            <%# ------ login/logout ------%>
+                <% if user_signed_in?%>
+                        <%= link_to "Logout", 
+                                    destroy_user_session_path, 
+                                    data: { turbo_method: :delete },
+                                    class: "m-1
+                                            w-12
+                                            h-6 
+                                            flex
+                                            items-center
+                                            justify-center
+                                            rounded-lg 
+                                            font-semibold
+                                            text-xs
+                                            bg-(--color-accent) 
+                                            hover:bg-(--color-primary)
+                                            cursor-pointer" %>
+                <% else %>
+                        <%= link_to "Sign In", 
+                                    new_user_session_path,
+                                    class: "m-1
+                                            w-12
+                                            h-6 
+                                            flex
+                                            items-center
+                                            justify-center
+                                            rounded-lg 
+                                            font-semibold
+                                            text-xs
+                                            bg-(--color-accent) 
+                                            hover:bg-(--color-primary)
+                                            cursor-pointer" %>
+
+                <% end %>
+            <%# ------ /login/logout ------%>
+            <%# ------ darkmode toggle ------%>
+                <div data-controller="dark-mode">
+                    <button 
+                        data-action="click->dark-mode#toggle"
+                        data-dark-mode-target="button" 
+                        class="m-1
+                            w-12
+                            h-6
+                            rounded-lg 
+                            font-semibold
+                            text-xs
+                            bg-(--color-accent) 
+                            hover:bg-(--color-primary)
+                            cursor-pointer">
+                    </button>
+                </div>
+            <%# ------ /darkmode toggle ------%>
+            </div>
+
         </div>
-        <% end %>
-    
-    <div class="text-xl text-center font-semibold text-black px-4">
-        <%= current_user.name %>
-    </div>
-    </div>
-</div>
-<%# ------ /user info ------%>    
-    <%= link_to "Home", root_path,
-                        class: "btn_side" %>
-    <%= link_to "Feed", feed_path,
-                        class: "btn_side" %>
 
-<%# ------ searchbar ------%>
-    <%= form_with(url: profile_index_path, 
-                method: :get,
-                data: {controller: "search-form",
-                turbo_frame: "names",
-                turbo_action: "advance"
-                }
-            ) do |form| %>
-            <div class="bg-(--color-secondary) font-semibold py-2 px-4">
-        <%= form.text_field :query, placeholder: "User Search", class: "w-full rounded-md outline-2 outline-(--color-primary)/50 outline-offset-3 focus:outline-4 focus:outline-(--color-primary) focus:outline-offset-3",
-                                    data: {action: "input->search-form#search"} %>
-       
-    </div>
-    <% end %>    
-<%# ------ /searchbar ------%>
 
-<turbo-frame id="names">
-    <div class="flex flex-col gap-4">
-        <% if defined?(@names) %>
-   
-            <%= render partial: "profile/name",
-                        collection: @names,
-                        as: :user %>
+        <div class="flex flex-col">
+            <%# ------ buttons ------%> 
+            
+                <%= link_to "Home", root_path,
+                                    class: "btn_side" %>
 
-        <% end %>
+                <%= link_to "Feed", feed_path,
+                                    class: "btn_side" %>
+
+                <%= link_to "Friends", friends_profile_path(current_user),
+                                    class: "btn_side" %>
+            <%# ------/ buttons ------%> 
+ 
+            
         </div>
-</turbo-frame>
-
-<% end %>
-</div>
+    
+        <% end %>
+    </div>
+    
 </div>

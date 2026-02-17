@@ -1,42 +1,60 @@
 
+
 <turbo-frame id="<%= dom_id(comment) %>">
-<div class="m-4">
-    <div class="flex flex-col pl-4 sm:w-auto">
-        <div class="flex flex-row place-content-between items-end">
-            <div class="flex flex-row items-end">
-                <div>
+<div class="flex flex-row mr-2 ml-10 p-8 bg-(--color-background) rounded-md shadow-xl">
+            <div class="shrink-0">
                     <%= link_to profile_path(comment.user) do %>
                         <% if comment.user.image.attached? %>    
                             <%= image_tag comment.user.image.variant(resize_to_fill: [50, 50]).processed, class: "rounded-full" %>
                         <% else %>
                             [img]
                         <% end %>
-                        <div class="font-bold">
-                            <%= comment.user.name %>
-                        </div>
+            </div>
+            <div class="m-2 flex flex-col w-full">
+                        <div class="font-bold text-s"><%= comment.user.name %></div>
                     <% end %>
-                </div>
                 
-                </div>
-                <div class="text-xs font-thin text-black"><%= @post.updated_at.strftime("%B %d, %Y") %></div>
-        </div>
-        <div class="m-4">
+                
+                <div class="text-xs font-thin"><%= @post.updated_at.strftime("%B %d, %Y") %></div>
+        
+        <div class="m-2">
             <%= comment.content %>
         </div>
 
-    </div>
+   <div class="w-full flex justify-end">
     <% if comment.user == current_user %>
     <div class="flex flex-row">
     
         <%= link_to "edit", edit_post_comment_path(comment.post, comment),
             data: { turbo_frame: dom_id(comment) },
-            class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+            class: "m-1
+                            w-12
+                            h-8 
+                            flex
+                            items-center
+                            justify-center
+                            rounded-lg 
+                            font-semibold
+                            text-xs
+                            bg-(--color-accent) 
+                            hover:bg-(--color-primary)
+                            cursor-pointer" %>
         <%= button_to "delete", post_comment_path(comment.post, comment), 
             method: :delete, 
-            class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", 
+            class: "m-1
+                    w-12
+                    h-8
+                    rounded-lg 
+                    font-semibold
+                    text-xs
+                    bg-(--color-accent) 
+                    hover:bg-(--color-primary)
+                    cursor-pointer", 
             data: { turbo_confirm: "Are you sure?" } %>
     <%end%>
     
+    </div>
+    </div>
     </div>
 </div>
 </turbo-frame>

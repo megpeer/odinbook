@@ -27,21 +27,17 @@
     <%= javascript_importmap_tags %>
   </head>
 
-<body class="font-sans bg-[var(--color-text)]/10 text-[var(--color-text)] min-h-screen">
+<body class="font-sans bg-[var(--color-background)] text-[var(--color-text)] min-h-screen flex relative">
 
 
-    <nav>
-    <%= render 'layouts/navbar' %>
-    </nav> 
 
+    <%#= render 'layouts/navbar' %>
+    <%= render 'layouts/sidebar' %>
+  
+    <main class="ml-45 p-18 w-full max-w-2xl">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>    
-     <nav>
-    <%= render 'layouts/sidebar' %>
-    </nav>
-
-    <main class="min-h-screen flex">
-    <div class="flex-1 ml-64 p-4">
+    <div class="">
       <%= yield %>
     </div>
 

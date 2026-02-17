@@ -1,0 +1,33 @@
+<%# profiles/friends %>
+<turbo-frame id="user-<%= current_user.id %>-friends">
+<%= render "profiles/friends_content"%>
+</turbo-frame>
+<div class="py-10">
+<%# ------ searchbar ------%>
+<%= form_with(url: profiles_path, 
+              method: :get,
+              data: {controller: "search-form",
+              turbo_frame: "names",
+              turbo_action: "advance"
+              }
+              ) do |form| %>
+  <div class="font-semibold py-2 px-4">
+    <%= form.text_field :query, placeholder: "User Search", class: "w-xs outline outline-(--color-text)/50 outline-offset-3 focus:outline-(--color-primary)",
+                              data: {action: "input->search-form#search"} %>
+  </div>
+<% end %>    
+<%# ------ /searchbar ------%>
+<%# ------ search results ------%>
+<turbo-frame id="names">
+    <div class="flex flex-col gap-4">
+        <% if defined?(@names) %>
+
+            <%= render partial: "profile/name",
+                        collection: @names,
+                        as: :user %>
+
+        <% end %>
+        </div>
+</turbo-frame>
+<%# ------ /search results ------%>
+</div>

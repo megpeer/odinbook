@@ -1,12 +1,32 @@
 <% return unless post && comment %>
 <%= form_with(model: [ post, comment ], class: "contents") do |form| %>
 
-  <div class="my-5">
-add comment:
-    <%= form.text_area :content, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": comment.errors[:content].none?, "border-red-400 focus:outline-red-600": comment.errors[:text].any?}] %>
-  </div>
+  <div class="mr-2 ml-10 p-8 bg-(--color-background) rounded-md shadow-xl"
+       data-controller="charlimit"
+       data-charlimit-number-value="400">
+    <%= form.text_area :content, 
+                        maxlength: 400, 
+                        placeholder: "add comment", 
+                        rows: 4,
+                        data: {
+                            action: "input->charlimit#update",
+                            charlimit_target: "input"
+                        },
+                        class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full focus:outline-(--color-primary)" %>
+      <div class="text-sm text-(--color-text)/50">
+      <span data-charlimit-target="output"></span> characters remaining
+    </div>
 
-  <div class="inline">
-    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  <div class="flex justify-end">
+    <%= form.submit class: "m-1
+                            w-28
+                            h-9
+                            rounded-lg 
+                            font-semibold
+                            text-xs
+                            bg-(--color-accent) 
+                            hover:bg-(--color-primary)
+                            cursor-pointer" %>
+  </div>
   </div>
 <% end %>

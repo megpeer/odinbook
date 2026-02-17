@@ -1,35 +1,51 @@
-<%= form_with(model: post, id: "post_form", class: "contents") do |form| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<div class="post bg-(--color-background) rounded-md shadow-xl sticky top-0 w-full max-w-200 mx-auto m-2 p-8">
+  
+  <%= form_with(model: post, id: "post_form", class: "contents") do |form| %>
+    <% if post.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+        <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul class="list-disc ml-6">
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul class="list-disc ml-6">
+          <% post.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+        <div class="w-full">
+    <div data-controller="charlimit" 
+        data-charlimit-number-value="400">
+
+
+      <div>
+      <%= form.textarea :text, 
+                        maxlength: 400, 
+                        rows: 4, 
+                        placeholder: "Post Something!", 
+                        data: {
+                            action: "input->charlimit#update",
+                            charlimit_target: "input"
+                        },
+                        class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full focus:outline-(--color-primary)"%>
+    </div>
+
+    <div class="text-sm text-(--color-text)/50">
+      <span data-charlimit-target="output"></span> characters remaining
+    </div>
+    
+    <div>
+    </div>
+    <div class="flex justify-end">
+      <%= form.submit class: "m-1
+                            w-25
+                            h-9
+                            rounded-lg 
+                            font-semibold
+                            text-s
+                            bg-(--color-accent) 
+                            hover:bg-(--color-primary)
+                            cursor-pointer" %>
     </div>
   <% end %>
-  <div data-controller="charlimit" 
-      data-charlimit-number-value="400">
-
-  <div class="my-5">
-    <%= form.textarea :text, 
-                      maxlength: 400, 
-                      rows: 4, 
-                      placeholder: "400 character limit", 
-                      data: {
-                          action: "input->charlimit#update",
-                          charlimit_target: "input"
-                      },
-                      class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full"%>
-  </div>
-
-  <div class="text-sm text-gray-500">
-    <span data-charlimit-target="output"></span> characters remaining
-  </div>
-  </div>
-  <div class="inline">
-    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
-  </div>
-<% end %>
+</div>
+</div>

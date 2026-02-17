@@ -1,8 +1,12 @@
 <%= link_to post_path(post), data: { turbo_frame: "_top" } do %>
 <div class="flex flex-row">
-    <div class=" m-2 font-semibold"><%= (post.comments.count) %></div>
-    <div data-controller="icon-swap" data-icon-swap-default-url="<%= image_path('Comment-Light.svg') %>" data-icon-swap-hover-url="<%= image_path('Comment-Dark.svg') %>">
-        <img src="<%= image_path('Comment-Light.svg') %>" data-icon-swap-target="icon" onmouseover="this.src=this.parentNode.dataset.iconSwapHoverUrl" onmouseout="this.src=this.parentNode.dataset.iconSwapDefaultUrl">
+    <div class="m-2 font-semibold"><%= (post.comments.count) %></div>
+    <div class="flex items-center gap-2">
+        <div class="w-7 h-7 flex items-center justify-center">
+            <div data-controller="icon-swap" data-icon-swap-default-url="<%= image_path('Comment-Light.svg') %>" data-icon-swap-hover-url="<%= image_path('Comment-Dark.svg') %>">
+                <img src="<%= image_path('Comment-Light.svg') %>" data-icon-swap-target="icon" onmouseover="this.src=this.parentNode.dataset.iconSwapHoverUrl" onmouseout="this.src=this.parentNode.dataset.iconSwapDefaultUrl">
+            </div>
+        </div>
     </div>
 </div>
 <% end %>

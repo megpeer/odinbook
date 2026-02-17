@@ -1,25 +1,45 @@
-<div class="flex items-center gap-2">
-    <% if (like = post.likes.find_by(user: current_user)) %>
-        <%= button_to "unlike",
-        post_like_path(post, like),
-        method: :delete,
-        data: { turbo_frame: dom_id(post, :actions) },
-        class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-teal-600 hover:bg-teal-500 font-medium cursor-pointer" %>
-    <% else %>    
-        <%= button_to "like", 
-        post_likes_path(post), 
-        method: :post,
-        data: { turbo_frame: dom_id(post, :actions) },
-        class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-teal-600 hover:bg-teal-500 font-medium cursor-pointer"%>
-    <% end %>
+<div class="flex flex-row">
+    <div class="m-2 font-semibold"><%= (post.likes.count) %></div>
+    <div class="flex items-center gap-2">
+        <% if (like = post.likes.find_by(user: current_user)) %>
+                
+            <%= link_to post_like_path(post, like),
+                
+                data: { 
+                    turbo_method: :delete,
+                    turbo_frame: dom_id(post, :actions),
+                    controller: "icon-swap",
+                    icon_swap_default_url: image_path("Unlike-Light.svg"),
+                    icon_swap_hover_url: image_path("Unlike-Dark.svg")},
+                    class: "w-7 h-7 flex items-center justify-center" do %>
+                    <%= image_tag "Unlike-Light.svg", 
+                    data: { icon_swap_target: "icon" },
+                    class: "w-7 h-7",
+                    onmouseover: "this.src=this.parentNode.dataset.iconSwapHoverUrl",
+                    onmouseout: "this.src=this.parentNode.dataset.iconSwapDefaultUrl" %>
+        <% end %>
 
-  <span class="text-sm text-gray-600">>
-  </span>
-    LIKES:
-     <div>
-        likes count: <%= post.likes.count %>
-        </div>
-    <% post.likes.each do |like| %>
-    <%= like.user.name %>
-    <% end %>
+        <% else %>    
+                
+            <%= link_to post_likes_path(post),
+
+                data: {
+                    turbo_method: :post,
+                    turbo_frame: dom_id(post, :actions),
+                    controller: "icon-swap",
+                    icon_swap_default_url: image_path("Like-Light.svg"),
+                    icon_swap_hover_url: image_path("Like-Dark.svg")},
+                    class: "w-7 h-7 flex items-center justify-center" do %>
+                    <%= image_tag "Like-Light.svg",
+                    data: { icon_swap_target: "icon" },
+                    class: "w-7 h-7",
+                    onmouseover: "this.src=this.parentNode.dataset.iconSwapHoverUrl",
+                    onmouseout: "this.src=this.parentNode.dataset.iconSwapDefaultUrl" %>
+        <% end %>
+
+        <% end %>
+
+    <span class="text-sm text-gray-600">
+    </span>
+    </div>
 </div>

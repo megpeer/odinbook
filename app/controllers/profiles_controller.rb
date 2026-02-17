@@ -1,4 +1,4 @@
-class ProfileController < ApplicationController
+class ProfilesController < ApplicationController
   include ProfileHelper
   before_action :authenticate_user!
   before_action :set_user, only: [ :show, :follow, :unfollow ]
@@ -17,7 +17,7 @@ class ProfileController < ApplicationController
     end
       if turbo_frame_request?
     render html: render_to_string(
-      partial: "profile/name",
+      partial: "profiles/name",
       collection: @names,
       as: :user
     ).then { |content| "<turbo-frame id='names'>#{content}</turbo-frame>".html_safe }
@@ -25,7 +25,10 @@ class ProfileController < ApplicationController
     render html: "<turbo-frame id='names'></turbo-frame>".html_safe
       end
   end
-
+def friends
+  @friends = current_user.friends
+  render :friends
+end
 
   def follow
     connection = Connection.find_or_initialize_by(
@@ -99,25 +102,22 @@ class ProfileController < ApplicationController
     render turbo_stream: [
       turbo_stream.update(
         frame_id,
-        partial: "profile/follow_button",
+        partial: "profiles/follow_button",
         locals: { user: @user }
       ),
       turbo_stream.update(
         "#{@user.id}-follower-count",
-        partial: "profile/follower_count",
+        partial: "profiles/follower_count",
         locals: { user: @user }
       )
     ]
   end
 
   def render_friendlist_update
-    frame_id = "user-#{current_user.id}-friends-list"
-    render turbo_stream: [
-      turbo_stream.update(
-        frame_id,
-        partial: "profile/friends_list",
-        locals: { user: current_user }
-      )
-    ]
+    current_user.reload
+    render turbo_stream: turbo_stream.replace(
+         "user-#{current_user.id}-friends",
+          partial: "profiles/friends_content"
+    )
   end
 end

@@ -43,12 +43,22 @@
                 font-semibold
                 py-2
                 px-4
+                w-full
+                block
     }
 
     .icon-placeholder {
                 background-image: url("Comment-Light.svg"); /* Default icon path from asset pipeline */
-}
+    }
 
-.icon-link:hover .icon-placeholder {
+    .icon-link:hover .icon-placeholder {
                 background-image: url("Comment-Dark.svg"); /* Swapped icon path on hover */
-}
+    }
+
+    .like-placeholder {
+                background-image: url("Like-Light.svg"); /* Default icon path from asset pipeline */
+    }
+
+    .like-link:hover .like-placeholder {
+                background-image: url("Like-Dark.svg"); /* Swapped icon path on hover */
+    }

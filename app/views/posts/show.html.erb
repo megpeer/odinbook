@@ -1,6 +1,6 @@
 <%# POST view, with comments %>
 
-<div id="<%= dom_id(@post, :container) %>" class="flex flex-col pl-4 sm:w-auto m-4">
+<div id="<%= dom_id(@post, :container) %>" class="flex flex-col space-y-6">
     <div>
         <%= render "posts/post", post: @post %>
     </div>
