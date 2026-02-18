@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
 
   # profiles
+
   resources :profiles do
     member do
       get :friends

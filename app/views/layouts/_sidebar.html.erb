@@ -1,25 +1,71 @@
-<div class="fixed min-h-screen flex flex-col w-45 bg-(--color-secondary)">
-    <div class="">
-        <div class="flex justify-between">
-            <% if user_signed_in? %>
-            <%# ------ user info ------%>
-                <%= link_to profile_path(current_user) do %>
-                    <div class="p-4 w-fit hover:bg-(--color-primary) rounded-full">
-                        <div>
-                            <% if current_user.image.attached? %>
-                            <%= image_tag current_user.image.variant(resize_to_fill: [70, 70]).processed, class: "rounded-full" %>
-                            <% else %>
-                            <%= image_tag("Avatar-Accent.svg") %>
-                            <% end %>
-                            <div class=" text-xl font-semibold text-center">
-                                <%= current_user.name %>
-                            </div>
-                        </div>
-                        
-                    </div>
+<div class="fixed min-h-screen flex flex-col justify-between w-[200px] shadow-lg">
+
+        <div>
+            <div class="font-semibold
+                text-xl
+                py-2
+                
+                w-full
+                block">
+                <div class="flex items-center p-2 ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.1" stroke="currentColor" class="w-8 h-8 inline stroke-1.5 text-(--color-text)">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
+                </svg>
+                <span class="font-semibold text-2xl justfiy-center">OdinBook</span> 
+            </div>
+        <% if user_signed_in? %>
+            <%# ------ buttons ------%> 
+               <%= link_to profile_path(current_user), class: "btn_side flex items-center gap-2 w-full" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 inline stroke-1.5 text-(--color-text)">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+                <span>Profile</span>
                 <% end %>
-            <%# ------ /user info ------%>
-            <div class="flex flex-col w-full p-4">
+
+                <%= link_to root_path, class: "btn_side flex items-center gap-2 w-full" do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 inline stroke-1.5 text-(--color-text)">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                <span>Home</span>
+                <% end %>
+
+                <%= link_to feed_path, class: "btn_side flex items-center gap-2 w-full" do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 inline stroke-1.5 text-(--color-text)">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+                    </svg>
+                <span>Feed</span>
+                <% end %>
+
+                <%= link_to friends_profile_path(current_user), class: "btn_side flex items-center gap-2 w-full" do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 inline stroke-1.5 text-(--color-text)">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                    </svg>  
+                <span>Friends</span>
+                <% end %>
+            <%# ------/ buttons ------%> 
+        <% end %>     
+        </div>
+
+    </div>
+
+    <div class="flex flex-col w-full p-4">
+        <%# ------ darkmode toggle ------%>
+                <div data-controller="dark-mode">
+                    <button 
+                        data-action="click->dark-mode#toggle"
+                        data-dark-mode-target="button" 
+                        class="m-1
+                            w-8
+                            h-8
+                            rounded-full 
+                            font-semibold
+                            text-xs
+                            bg-(--color-text)
+                            hover:bg-(--color-primary)
+                            cursor-pointer">
+                    </button>
+                </div>
+            <%# ------ /darkmode toggle ------%>
             <%# ------ login/logout ------%>
                 <% if user_signed_in?%>
                         <%= link_to "Logout", 
@@ -34,7 +80,8 @@
                                             rounded-lg 
                                             font-semibold
                                             text-xs
-                                            bg-(--color-accent) 
+                                            outline
+                                            outline-(--color-primary) 
                                             hover:bg-(--color-primary)
                                             cursor-pointer" %>
                 <% else %>
@@ -46,54 +93,16 @@
                                             flex
                                             items-center
                                             justify-center
-                                            rounded-lg 
+                                            rounded-lg
                                             font-semibold
                                             text-xs
-                                            bg-(--color-accent) 
+                                            outline
+                                            outline-(--color-primary)
                                             hover:bg-(--color-primary)
                                             cursor-pointer" %>
 
                 <% end %>
             <%# ------ /login/logout ------%>
-            <%# ------ darkmode toggle ------%>
-                <div data-controller="dark-mode">
-                    <button 
-                        data-action="click->dark-mode#toggle"
-                        data-dark-mode-target="button" 
-                        class="m-1
-                            w-12
-                            h-6
-                            rounded-lg 
-                            font-semibold
-                            text-xs
-                            bg-(--color-accent) 
-                            hover:bg-(--color-primary)
-                            cursor-pointer">
-                    </button>
-                </div>
-            <%# ------ /darkmode toggle ------%>
-            </div>
-
-        </div>
-
-
-        <div class="flex flex-col">
-            <%# ------ buttons ------%> 
             
-                <%= link_to "Home", root_path,
-                                    class: "btn_side" %>
-
-                <%= link_to "Feed", feed_path,
-                                    class: "btn_side" %>
-
-                <%= link_to "Friends", friends_profile_path(current_user),
-                                    class: "btn_side" %>
-            <%# ------/ buttons ------%> 
- 
-            
-        </div>
-    
-        <% end %>
-    </div>
-    
+    </div>       
 </div>
