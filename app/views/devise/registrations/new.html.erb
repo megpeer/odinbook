@@ -1,34 +1,40 @@
-<h2>Sign up</h2>
+<span class="font-semibold text-lg p-10 ">Sign up</span>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
+<div class="p-5">
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-3xs outline outline-(--color-text)/50 outline-offset-3 focus:outline-(--color-primary) rounded-sm" %>
   </div>
   <div class="field">
   <%= f.label :name %><br />
-  <%= f.text_field :name, autofocus: true %>
+  <%= f.text_field :name, autofocus: true, class: "w-3xs outline outline-(--color-text)/50 outline-offset-3 focus:outline-(--color-primary) rounded-sm"  %>
 </div>
 
-
+<div class="p-5">
+  </div>
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "w-3xs outline outline-(--color-text)/50 outline-offset-3 focus:outline-(--color-primary) rounded-sm" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-3xs outline outline-(--color-text)/50 outline-offset-3 focus:outline-(--color-primary) rounded-sm" %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+</div>
+  <div class="actions p-5">
+    <%= f.submit "Sign up", class: "w-25 h-10
+                                    rounded-full
+                                    text-sm font-semibold
+                                    bg-(--color-accent)
+                                    hover:bg-(--color-primary)
+                                    cursor-pointer" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+

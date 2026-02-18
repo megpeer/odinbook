@@ -68,43 +68,26 @@
                     </button>
                 </div>
             <%# ------ /darkmode toggle ------%>
-            <%# ------ login/logout ------%>
+            <%# ------ logout ------%>
                 <% if user_signed_in?%>
                         <%= link_to "Logout", 
                                     destroy_user_session_path, 
                                     data: { turbo_method: :delete },
                                     class: "m-1
-                                            w-12
+                                            w-15
                                             h-6 
                                             flex
                                             items-center
                                             justify-center
-                                            rounded-lg 
+                                            rounded-full 
                                             font-semibold
                                             text-xs
                                             outline
                                             outline-(--color-primary) 
                                             hover:bg-(--color-primary)
                                             cursor-pointer" %>
-                <% else %>
-                        <%= link_to "Sign In", 
-                                    new_user_session_path,
-                                    class: "m-1
-                                            w-12
-                                            h-6 
-                                            flex
-                                            items-center
-                                            justify-center
-                                            rounded-lg
-                                            font-semibold
-                                            text-xs
-                                            outline
-                                            outline-(--color-primary)
-                                            hover:bg-(--color-primary)
-                                            cursor-pointer" %>
-
                 <% end %>
-            <%# ------ /login/logout ------%>
+            <%# ------ logout ------%>
             
     </div>       
 </div>

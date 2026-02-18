@@ -1,7 +1,7 @@
 
 
 <turbo-frame id="<%= dom_id(comment) %>">
-<div class="flex flex-row mr-2 ml-10 p-8 bg-(--color-background) rounded-md shadow-xl">
+<div class="flex flex-row m-6 mr-2 ml-10 p-8 bg-(--color-background) rounded-md shadow-xl">
             <div class="shrink-0">
                     <%= link_to profile_path(comment.user) do %>
                         <% if comment.user.image.attached? %>    
@@ -24,7 +24,19 @@
    <div class="w-full flex justify-end">
     <% if comment.user == current_user %>
     <div class="flex flex-row">
-    
+        <%= button_to "delete", post_comment_path(comment.post, comment), 
+            method: :delete, 
+            class: "m-1
+                    w-12
+                    h-8
+                    rounded-full 
+                    font-semibold
+                    text-xs
+                    bg-(--color-accent) 
+                    hover:bg-(--color-primary)
+                    cursor-pointer", 
+            data: { turbo_confirm: "Are you sure?" } %>
+        <%end%>
         <%= link_to "edit", edit_post_comment_path(comment.post, comment),
             data: { turbo_frame: dom_id(comment) },
             class: "m-1
@@ -39,19 +51,7 @@
                             bg-(--color-accent) 
                             hover:bg-(--color-primary)
                             cursor-pointer" %>
-        <%= button_to "delete", post_comment_path(comment.post, comment), 
-            method: :delete, 
-            class: "m-1
-                    w-12
-                    h-8
-                    rounded-full 
-                    font-semibold
-                    text-xs
-                    bg-(--color-accent) 
-                    hover:bg-(--color-primary)
-                    cursor-pointer", 
-            data: { turbo_confirm: "Are you sure?" } %>
-    <%end%>
+       
     
     </div>
     </div>

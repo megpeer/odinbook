@@ -1,27 +1,85 @@
-<h2>Log in</h2>
-
+<span class="font-semibold text-lg p-10 ">Please log in</span>
+<div class="h-10"></div>
+<div class="">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-3xs outline outline-(--color-text)/50 outline-offset-3 focus:outline-(--color-primary) rounded-sm" %>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", class: "w-3xs outline outline-(--color-text)/50 outline-offset-3 focus:outline-(--color-primary) rounded-sm" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
-    <div class="field">
+    <div class="field m-2 accent-(--color-primary)">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", 
+      class: "inline-flex items-center justify-center
+              w-25 h-10
+              rounded-full
+              text-sm font-semibold
+              bg-(--color-accent)
+              hover:bg-(--color-primary)
+              cursor-pointer" %>
+    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to "Reset password", new_password_path(resource_name),
+      class: "inline-flex items-center justify-center
+              w-30 h-10 m-1
+              rounded-full
+              text-sm font-semibold
+              bg-(--color-accent)
+              hover:bg-(--color-primary)
+              cursor-pointer" %><br />
+<% end %>
   </div>
 <% end %>
-<%#= button_to "Sign in with GitHub", user_github_omniauth_authorize_path %>
+</div>
+<div class="flex flex-col w-50 items-center">
+<div class="">
 
-<%= render "devise/shared/links" %>
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= button_to omniauth_authorize_path(resource_name, provider), data: { turbo: false },
+                    class: "m-1
+                            w-40
+                            h-10 
+                            flex items-center
+                            p-2
+                            rounded-full
+                            font-semibold
+                            text-xs
+                            bg-(--color-accent) 
+                            hover:bg-(--color-primary)
+                            cursor-pointer" do%>
+                            <div class="flex items-center gap-1">
+      <span>
+      Sign in with <%= OmniAuth::Utils.camelize(provider) %>
+      </span >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="">
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 5.303 3.438 9.795 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.01-2.04-3.338.724-4.043-1.61-4.043-1.61-.546-1.385-1.332-1.755-1.332-1.755-1.09-.744.08-.73.08-.73 1.205.087 1.838 1.234 1.838 1.234 1.07 1.835 2.809 1.305 3.495.998.108-.775.42-1.305.762-1.605-2.665-.3-5.464-1.332-5.464-5.93 0-1.31.465-2.38 1.235-3.22-.12-.3-.535-1.52.117-3.17 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.4.01 0 .01 0 .02 0 1.02.0 2.04.133 3 .4 2.28-1.552 3.285-1.23 3.285-1.23.652 1.65.238 2.87.12 3.17.77.84 1.235 1.91 1.235 3.22 0 4.61-2.8 5.625-5.475 5.92.42.36.81 1.015.81 2.04 0 1.47-.015 2.67-.015 3.03 0 .32.21.69.825.57C20.565 21.79 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+      </svg>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%= link_to "Sign Up", new_registration_path(resource_name),
+      class: "inline-flex items-center justify-center
+              w-40 h-10 m-1
+              rounded-full
+              text-sm font-semibold
+              bg-(--color-accent)
+              hover:bg-(--color-primary)
+              cursor-pointer" %><br />
+<% end %>
+  
+  </div>
+  </div>

@@ -45,12 +45,15 @@ class CommentsController < ApplicationController
      @comment.destroy!
 
     respond_to do |format|
-      format.html { redirect_to @post,
-      notice: "comment was successfully destroyed.",
-      status: :see_other }
-      format.json { head :no_content }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.remove(@comment)
+      end
+      format.html do
+        redirect_to @post
+      end
     end
   end
+
   private
   def comment_params
     params.require(:comment).permit(:content, :user_id, :post_id)

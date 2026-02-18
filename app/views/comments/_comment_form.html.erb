@@ -1,5 +1,5 @@
 <% return unless post && comment %>
-<div class="mr-2 ml-10 p-8 bg-(--color-background) rounded-md shadow-xl flex">
+<div class="border m-6 mr-2 ml-10 p-8 bg-(--color-background) rounded-md shadow-xl flex">
  <div class="shrink-0 p-2">
   <% if current_user.image.attached? %>
   <%= image_tag current_user.image.variant(resize_to_fill: [50, 50]).processed, class: "rounded-full" %>

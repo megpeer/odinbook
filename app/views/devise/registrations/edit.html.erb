@@ -15,7 +15,7 @@
     </div>
     
     </div>
-    <h1 class="font-semibold">Edit User Info</h1>
+    <span class="font-semibold text-lg p-5">Edit User Info</span>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -45,7 +45,7 @@
   <div class="input-field">
     <%= f.file_field :image, class: "block w-full text-sm
             file:mr-4 file:py-2 file:px-4
-            file:rounded-lg file:border-0
+            file:rounded-full file:border-0
             file:text-sm file:font-semibold
             file:bg-(--color-accent)
             file:hover:bg-(--color-primary)
@@ -67,7 +67,7 @@
     <%= f.submit "Update",
           class: "inline-flex items-center justify-center
               w-32 h-10
-              rounded-lg
+              rounded-full
               text-sm font-semibold
               bg-(--color-accent)
               hover:bg-(--color-primary)
@@ -80,7 +80,7 @@
 <div class="p-1"><%= link_to "Cancel", :back,
                     class: "inline-flex items-center justify-center
               w-40 h-10
-              rounded-lg
+              rounded-full
               text-sm font-semibold
               bg-(--color-accent)
               hover:bg-(--color-primary)
@@ -92,7 +92,7 @@
           method: :delete,
           class: "inline-flex items-center justify-center
               w-40 h-10
-              rounded-lg
+              rounded-full
               text-sm font-semibold
               bg-(--color-accent)
               hover:bg-red-500

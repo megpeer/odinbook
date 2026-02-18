@@ -11,7 +11,7 @@
   </div>
 
 
-  <%= form_with(model: post, id: "post_form", class: "contents") do |form| %>
+  <%= form_with(model: post, id: "post_form", data: { turbo: false}, class: "contents") do |form| %>
     <% if post.errors.any? %>
       <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
         <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
