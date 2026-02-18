@@ -1,7 +1,18 @@
 <% return unless post && comment %>
+<div class="mr-2 ml-10 p-8 bg-(--color-background) rounded-md shadow-xl flex">
+ <div class="shrink-0 p-2">
+  <% if current_user.image.attached? %>
+  <%= image_tag current_user.image.variant(resize_to_fill: [50, 50]).processed, class: "rounded-full" %>
+  <% else %>
+  <%= image_tag("Avatar-Accent.svg") %>
+  <% end %>
+
+  </div>
+
+
 <%= form_with(model: [ post, comment ], class: "contents") do |form| %>
 
-  <div class="mr-2 ml-10 p-8 bg-(--color-background) rounded-md shadow-xl"
+  <div class="w-full"
        data-controller="charlimit"
        data-charlimit-number-value="400">
     <%= form.text_area :content, 
@@ -19,14 +30,15 @@
 
   <div class="flex justify-end">
     <%= form.submit class: "m-1
-                            w-28
+                            w-37
                             h-9
-                            rounded-lg 
+                            rounded-full
                             font-semibold
-                            text-xs
+                            text-s
                             bg-(--color-accent) 
                             hover:bg-(--color-primary)
                             cursor-pointer" %>
+  </div>
   </div>
   </div>
 <% end %>

@@ -38,9 +38,9 @@ export default class extends Controller {
   updateButtonText() {
     // Check correct class
     if (document.documentElement.classList.contains("dark")) {
-      this.buttonTarget.textContent = "☀️";
+      this.buttonTarget.textContent = "☼";
     } else {
-      this.buttonTarget.textContent = "🌙";
+      this.buttonTarget.textContent = "☾";
     }
   }
 }
