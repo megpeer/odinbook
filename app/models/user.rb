@@ -8,7 +8,7 @@ class User < ApplicationRecord
          has_one_attached :image
          has_many :posts, dependent: :destroy
          has_many :comments
-
+  # ##ENABLE ON DEPLOY###
   # after_create_commit :send_welcome_email, on: :create
 
   # ----------------------------------
@@ -33,6 +33,17 @@ class User < ApplicationRecord
   has_many  :followers,
             through: :passive_connections,
             source: :follower
+
+    # _________AVATAR STUFF
+    def avatar_thumbnail(size = 50)
+      return unless image.attached?
+        if image.variable?
+          image.variant(resize_to_fill: [ 50, 50 ]).processed
+        else
+          image
+        end
+    end
+  # _________/AVATAR STUFF
   # ----------------------------------
   # Helpers
   # ----------------------------------
@@ -50,7 +61,7 @@ class User < ApplicationRecord
   end
   # Rturn all pending passive connections
   def pending
-    passive_connections.where(accepted: false).map(&:follower)
+  passive_connections.where(accepted: false).map(&:follower)
   end
   # Return all accepted freinds (users)
   def friends

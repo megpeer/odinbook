@@ -2,11 +2,8 @@
 
 <div class="post flex bg-(--color-background) rounded-md shadow-xl sticky top-0 w-full max-w-200 mx-auto m-2 p-8">
   <div class="shrink-0 p-2">
-  <% if current_user.image.attached? %>
-  <%= image_tag current_user.image.variant(resize_to_fill: [50, 50]).processed, class: "rounded-full" %>
-  <% else %>
-  <%= image_tag("Avatar-Accent.svg") %>
-  <% end %>
+<%= image_tag current_user.avatar_thumbnail || "avatar.svg",
+              class: "w-12 h-12 rounded-full shrink-0" %>
 
   </div>
 

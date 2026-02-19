@@ -66,23 +66,31 @@ end
 
   def accept_userpage
     pending_friend = User.find(params[:id])
-    connection = Connection.where(
-                  follower_id: pending_friend.id,
-                  followee_id: current_user.id
-                  )
-    connection.update(accepted: true)
-    render_friendlist_update
+
+    connection = Connection.find_by(
+      follower_id: pending_friend.id,
+      followee_id: current_user.id
+    )
+
+    connection&.update!(accepted: true)
+
+    redirect_to friends_profile_path, status: :see_other
   end
 
   def delete_userpage
     pending_friend = User.find(params[:id])
-    connection = Connection.where(
-                  follower_id: pending_friend.id,
-                  followee_id: current_user.id
-                  )
-    connection.destroy_all
-    render_friendlist_update
+
+    connection = Connection.find_by(
+      follower_id: pending_friend.id,
+      followee_id: current_user.id
+    )
+
+    connection&.destroy
+    current_user.reload
+
+    redirect_to friends_profile_path, status: :see_other
   end
+
 
   private
   def set_user

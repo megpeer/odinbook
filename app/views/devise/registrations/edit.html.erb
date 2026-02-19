@@ -2,11 +2,9 @@
   <%# profile info card %>
   <div class="flex flex-row">
     <div>
-    <% if current_user.image.attached? %>
-    <%= image_tag current_user.image.variant(resize_to_fill: [100, 100]).processed, class: "shrink-0 rounded-full mb-4" %>
-    <% else %>
-    [img]
-    <% end %>
+
+    <%= image_tag current_user.avatar_thumbnail || "avatar.svg",
+              class: "w-12 h-12 rounded-full shrink-0" %>
     </div>
     <div class="">
       <div class="text-xl font-semibold">

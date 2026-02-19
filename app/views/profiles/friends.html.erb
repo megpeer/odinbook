@@ -1,9 +1,10 @@
 <%# profiles/friends %>
-<turbo-frame id="user-<%= current_user.id %>-friends">
+
 <%= render "profiles/friends_content"%>
-</turbo-frame>
-<div class="py-10">
+
+
 <%# ------ searchbar ------%>
+<div class="py-10">
 <%= form_with(url: profiles_path, 
               method: :get,
               data: {controller: "search-form",

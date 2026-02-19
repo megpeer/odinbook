@@ -5,9 +5,9 @@
     <div>
   
     <% if user.image.attached? %>
-    <%= image_tag user.image.variant(resize_to_fill: [100, 100]).processed, class: "rounded-full mb-4 shrink-0" %>
+    <%= image_tag user.avatar_thumbnail, class: "rounded-full mb-4 shrink-0" %>
     <% else %>
-    [img]
+    <%= image_tag("avatar.svg") %>
     <% end %>
     </div>
     <div class="">

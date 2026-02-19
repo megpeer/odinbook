@@ -3,12 +3,9 @@
     <div class="post flex flex-row m-2 p-8 bg-(--color-background) rounded-md shadow-xl">
         <div class="shrink-0">
             <%= link_to profile_path(post.user), data: { turbo_frame: "_top" } do %>    
-                <% if post.user.image.attached? %>
-                    <%= image_tag post.user.image.variant(resize_to_fill: [50, 50]).processed,
-                    class: "rounded-full" %>
-                <% else %>
-                    [img]
-                <% end %>
+               
+                <%= image_tag post.user.avatar_thumbnail || "avatar.svg",
+              class: "w-12 h-12 rounded-full shrink-0" %>
         </div>
         <div class="m-2 flex flex-col w-full">
             <div class="font-bold text-s"><%= post.user.name %></div>
