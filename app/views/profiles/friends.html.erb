@@ -13,7 +13,7 @@
               }
               ) do |form| %>
   <div class="font-semibold py-2 px-4">
-    <%= form.text_field :query, placeholder: "User Search", class: "w-xs outline outline-(--color-text)/50 outline-offset-3 focus:outline-(--color-primary)",
+    <%= form.text_field :query, placeholder: "User Search", class: "w-xs rounded-md outline outline-(--color-text)/50 outline-offset-3 focus:outline-(--color-primary)",
                               data: {action: "input->search-form#search"} %>
   </div>
 <% end %>    

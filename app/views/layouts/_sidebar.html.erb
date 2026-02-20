@@ -1,18 +1,18 @@
-<div class="fixed min-h-screen flex flex-col justify-between w-[200px] shadow-lg">
-
-        <div>
-            <div class="font-semibold
-                text-xl
-                py-2
-                
-                w-full
-                block">
-                <div class="flex items-center p-2 ">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.1" stroke="currentColor" class="w-8 h-8 inline stroke-1.5 text-(--color-text)">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
-                </svg>
-                <span class="font-semibold text-2xl justfiy-center">OdinBook</span> 
-            </div>
+<div class="h-screen flex flex-col justify-between w-[200px] shadow-lg fixed
+            inset-y-0 left-0 -translate-x-full transition duration-200 ease-in-out
+            md:relative md:translate-x-0">
+    <div>
+        <div class="font-semibold
+            text-xl
+            py-2
+            w-full
+            block">
+            <div class="flex items-center p-2 ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.1" stroke="currentColor" class="w-8 h-8 inline stroke-1.5 text-(--color-text)">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
+            </svg>
+            <span class="font-semibold text-2xl justfiy-center">OdinBook</span> 
+        </div>
         <% if user_signed_in? %>
             <%# ------ buttons ------%> 
                <%= link_to profile_path(current_user), class: "btn_side flex items-center gap-2 w-full" do %>
@@ -45,7 +45,6 @@
             <%# ------/ buttons ------%> 
         <% end %>     
         </div>
-
     </div>
 
     <div class="flex flex-col w-full p-4">

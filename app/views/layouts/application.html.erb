@@ -27,17 +27,17 @@
     <%= javascript_importmap_tags %>
   </head>
 
-<body class="font-sans bg-[var(--color-background)] text-[var(--color-text)] min-h-screen flex relative">
+<body class="bg-[var(--color-background)] text-[var(--color-text)] h-screen overflow-hidden  md:flex">
 
 
 
-    <%#= render 'layouts/navbar' %>
+    <%= render 'layouts/navbar' %>
     <%= render 'layouts/sidebar' %>
   
-    <main class="ml-45 p-18 w-full max-w-2xl">
+    <main class="flex-1 md:ml-5 overflow-y-auto h-screen">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>    
-    <div class="">
+    <div class="w-full max-w-2xl">
       <%= yield %>
     </div>
 
