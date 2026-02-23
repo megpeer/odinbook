@@ -1,9 +1,7 @@
-# Odin Book – Social Media App
-OdinBook is a full-stack social media application inspired by Twitter, built as part of **[The Odin Project – Odin Book](https://www.theodinproject.com/lessons/ruby-on-rails-odin-book)** curriculum.
+# ForceBook – Social Media App
+ForceBook is a full-stack social media application inspired by Twitter, built to connect the Jedi of the Galaxy.
 
-This project was intentionally designed to demonstrate my **knowledge gained so far with Ruby on Rails development**. It showcases modern Rails conventions, Hotwire-driven interactivity, authentication best practices, testing discipline, and production-ready deployment patterns.
-
-Please check out my deployed App [HERE](https://www.example.com). Allow a few seconds for the app to load on render.
+Please check it out [HERE](https://odinbook-yvnb.onrender.com). Allow a few seconds for the app to load on render.
 Guests can log in with their own e-mail, GitHub Oauth, or with any of the pre-made accounts using the following user logins, with a password of: ```password```  
 luke@rebels.com  
 leia@rebels.com  
@@ -11,22 +9,6 @@ han@rebels.com
 chewbacca@rebels.com  
 
 If using your e-mail to create an account, please check for a welcome e-mail, which could be in your junk folder!
-
----
-
-## Project Intent
-
-The primary goal of this application is to demonstrate:
-
-* Understanding of modern Rails (Rails 8)
-* MVC architecture and RESTful design
-* Hotwire (Turbo + Stimulus) interactivity
-* Authentication and OAuth integration
-* Database-backed relationships and associations
-* Test coverage with RSpec
-* Production email configuration
-* Pagination & performance considerations
-* Responsive and accessible UI design
 
 ---
 
@@ -133,7 +115,7 @@ This keeps the frontend lightweight while maintaining a modern, interactive feel
 
 ### Database Design
 
-Odinbook uses a PostgreSQL relational DB, using the following schema:
+ForceBook uses a PostgreSQL relational DB, using the following schema:
 ##### Users
 * Managed via Devise (email/password + OAuth support via provider and uid)
 * Optional profile fields (name, bio)
@@ -221,12 +203,14 @@ Ensure you have:
 
 * Ability to build a full CRUD Rails application
 * Competence with modern Rails 8 ecosystem
-* Experience integrating authentication + OAuth
+* MVC architecture and RESTful design
+* Relational database modeling with PostgreSQL
+* Test coverage with RSpec
+* Authentication + OAuth integration
 * Familiarity with Hotwire and SPA-like UX patterns
-* Solid testing foundation using RSpec
-* Understanding of deployment-ready email systems
-* Clean UI using Tailwind
-* Practical database modeling with PostgreSQL
+* Clean, responsive UI using Tailwind
+* Pagination & performance considerations
+* Understanding of production email configuration
 
 This project reflects how I would structure and implement features in a real production Rails environment.
 
