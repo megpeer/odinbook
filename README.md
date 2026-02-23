@@ -1,8 +1,16 @@
-# Odin Book – Social Media App (Rails 8)
+# Odin Book – Social Media App
+OdinBook is a full-stack social media application inspired by Twitter, built as part of **[The Odin Project – Odin Book](https://www.theodinproject.com/lessons/ruby-on-rails-odin-book)** curriculum.
 
-A full-stack social media application inspired by Twitter, built as part of **[The Odin Project – Odin Book](https://www.theodinproject.com/lessons/ruby-on-rails-odin-book)** curriculum.
+This project was intentionally designed to demonstrate my **knowledge gained so far with Ruby on Rails development**. It showcases modern Rails conventions, Hotwire-driven interactivity, authentication best practices, testing discipline, and production-ready deployment patterns.
 
-This project was intentionally designed to demonstrate my **job readiness for a Ruby on Rails position**. It showcases modern Rails conventions, Hotwire-driven interactivity, authentication best practices, testing discipline, and production-ready deployment patterns.
+Please check out my deployed App [HERE](https://www.example.com). Allow a few seconds for the app to load on render.
+Guests can log in with their own e-mail, GitHub Oauth, or with any of the pre-made accounts using the following user logins, with a password of: ```password```  
+luke@rebels.com  
+leia@rebels.com  
+han@rebels.com  
+chewbacca@rebels.com  
+
+If using your e-mail to create an account, please check for a welcome e-mail, which could be in your junk folder!
 
 ---
 
@@ -10,7 +18,7 @@ This project was intentionally designed to demonstrate my **job readiness for a 
 
 The primary goal of this application is to demonstrate:
 
-* Understanding of **modern Rails (Rails 8)**
+* Understanding of modern Rails (Rails 8)
 * MVC architecture and RESTful design
 * Hotwire (Turbo + Stimulus) interactivity
 * Authentication and OAuth integration
@@ -38,28 +46,22 @@ The primary goal of this application is to demonstrate:
 ### Frontend
 
 * **Tailwind CSS**
-
   * Responsive small/medium screen navigation
   * Dark / Light mode toggle
 * **Turbo (Hotwire)**
-
   * Single-page feel interactions
 * **Stimulus**
-
   * Dynamic user search
   * Interactive UI behaviors
 
 ### Testing & Dev Tools
 
 * **RSpec**
-
   * Model specs (ActiveRecord associations)
   * Basic system tests (authentication flows, page loading)
 * **Guard**
-
   * Continuous test execution during development
 * **Letter Opener**
-
   * Local email preview in development
 
 ---
@@ -69,9 +71,9 @@ The primary goal of this application is to demonstrate:
 ### Authentication & Authorization
 
 * User registration and login via **Devise**
-* GitHub OAuth login integration
+* GitHub **OAuth** login integration
 * Secure session handling
-* Welcome emails for new users (Mailgun in production)
+* **Welcome emails** for new users (Mailgun in production)
 
 ### Posts
 
@@ -83,18 +85,18 @@ The primary goal of this application is to demonstrate:
 ### Likes
 
 * Like/unlike posts dynamically
-* Turbo streams update like counts in real-time
+* **Turbo streams** update like counts in real-time
 
 ### Comments
 
 * Users can comment on posts
-* Comments load and submit via Turbo for SPA-style experience
+* Comments load and submit via **Turbo** for SPA-style experience
 
 ### Friend Connections
 
 * Users can send and accept friend requests
-* Turbo-powered updates for adding/removing friends
-* Stimulus-enhanced user search for discovering other users
+* **Turbo**-powered updates for adding/removing friends
+* **Stimulus**-enhanced user search for discovering other users
 
 ### Profile Images
 
@@ -103,8 +105,8 @@ The primary goal of this application is to demonstrate:
 ### UI/UX
 
 * Responsive navigation bars (mobile & tablet friendly)
-* Dark/Light mode toggle
-* Clean, modern Tailwind design
+* **Dark/Light** mode toggle
+* Clean, modern **Tailwind** design
 
 ---
 
@@ -120,11 +122,9 @@ All core resources follow Rails conventions:
 * Likes
 * Friendships
 
-Associations are properly modeled and validated using ActiveRecord best practices.
+### Hotwire Interactivity
 
-### Hotwire-First Interactivity
-
-Instead of relying on heavy JavaScript frameworks, this app uses:
+This app uses:
 
 * **Turbo Frames & Streams** for dynamic UI updates
 * **Stimulus controllers** for focused JS behavior
@@ -133,10 +133,27 @@ This keeps the frontend lightweight while maintaining a modern, interactive feel
 
 ### Database Design
 
-* PostgreSQL relational schema
-* Proper foreign keys and associations
-* Optimized pagination with Pagy
-
+Odinbook uses a PostgreSQL relational DB, using the following schema:
+##### Users
+* Managed via Devise (email/password + OAuth support via provider and uid)
+* Optional profile fields (name, bio)
+* Avatar support via Active Storage
+##### Posts
+* belongs_to :user
+* Indexed on user_id
+##### Comments
+* belongs_to :user
+* belongs_to :post
+* Indexed on both post_id and user_id
+##### Likes
+* Join-style table connecting users and posts
+* Indexed on user_id and post_id
+##### Connections (Friendships)
+* follower_id and followee_id model directional connections
+* accepted boolean supports pending vs. confirmed friendships
+##### Active Storage
+* Uses Rails’ built-in blob + attachment tables
+* Supports user avatar uploads with variant tracking
 ---
 
 ## Testing Strategy
@@ -169,8 +186,8 @@ Testing reflects production-readiness and professional workflow expectations.
 ## Installation
 
 ```bash
-git clone <repo_url>
-cd <repo_name>
+git clone https://github.com/megpeer/odinbook
+cd odinbook
 
 bundle install
 rails db:create
